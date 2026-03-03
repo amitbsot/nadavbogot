@@ -37,6 +37,7 @@
         img, iframe { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .text-center { text-align: center; }
 
         h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; color: #fff; margin-bottom: 1.5rem; }
         h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--espresso); margin-bottom: 2rem; line-height: 1.2; }
@@ -69,7 +70,7 @@
 
         .header-spacer { height: 75px; }
 
-        /* Hero */
+      /* Hero */
         .hero { 
             background: 
                 linear-gradient(135deg, rgba(48, 38, 33, 0.9) 0%, rgba(74, 57, 49, 0.6) 100%),
@@ -91,19 +92,15 @@
         .about-image { background: #e8ded7; width: 100%; height: 300px; object-fit: cover; display: flex; align-items: center; justify-content: center; color: var(--text-light); border-radius: var(--radius); }
         .about-text strong { color: var(--bronze); font-weight: 700; }
 
-        
-         /* Infographic */
+        /* אזור תמונה - אינפוגרפיקה */
         .infographic-section { padding: 0; background: var(--espresso); position: relative; z-index: 2; }
         .infographic-section img { width: 100%; height: auto; display: block; border-radius: 0; }
-‎‏        <section class="infographic-section reveal-up">
-‎‏            <img src="IMG_7922.png" alt="סיפור של שינוי - מנער בסכנה למחנך מנצח">
-‎‏        </section>
 
         /* אזור ההרצאות */
         .lectures { 
             background: var(--sand); 
             text-align: center; 
-            z-index: 1; 
+            z-index: 1; /* z-index נמוך כדי לאפשר לאזורים הבאים לעלות עליו */
             padding: 4rem 0;
             position: relative;
         }
@@ -111,14 +108,12 @@
         .cards-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
         .card { background: var(--cream); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-md); text-align: right; border-top: 4px solid var(--bronze); }
         .card .target-audience { display: inline-block; background: rgba(200, 121, 65, 0.1); color: var(--bronze); font-weight: 600; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 1rem; }
-        
-        /* כותרת משנית לאזור ההרצאות המורחב */
         .lectures-subtitle { color: var(--text-light); font-size: 1.1rem; margin-top: -1rem; margin-bottom: 2rem; }
 
         /* קהל יעד */
         .audiences { 
             position: relative;
-            z-index: 10; 
+            z-index: 10; /* מקבל קדימות גבוהה כדי לדרוס את ההרצאות בגלילה */
             background: var(--espresso); 
             color: var(--cream); 
             text-align: center; 
@@ -133,6 +128,11 @@
         .audience-box h3 { color: var(--bronze); font-size: 1.2rem; margin-bottom: 0.5rem; }
         .audience-box p { color: #E0D6D1; margin: 0; font-size: 0.95rem; }
 
+        /* פודקאסט 
+        .podcast { position: relative; z-index: 10; background: var(--cream); padding: 5rem 0; }
+        .podcast-wrapper { max-width: 800px; margin: 2rem auto 0; background: #fff; padding: 1rem; border-radius: calc(var(--radius) + 4px); box-shadow: var(--shadow-md); }
+        .podcast-wrapper iframe { border-radius: var(--radius); }
+*/
         /* Footer / Contact */
         footer { position: relative; z-index: 10; background: var(--sand); color: var(--espresso); padding: 4rem 0 2rem; }
         .contact-form { background: #fff; padding: 2rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); margin-bottom: 3rem; text-align: center; }
@@ -160,9 +160,14 @@
             .about-image { height: 450px; flex: 1; }
             .about-text { flex: 1; }
             
-            /* הסרתי את ה-sticky כדי לאפשר גלילה חופשית באזור ההרצאות המורחב */
-            .lectures { padding: 4rem 0 6rem; margin-bottom: 0; }
-            .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } /* שיניתי ל-3 עמודות כדי להכיל יותר כרטיסיות */
+            /* הגדרות הסטיקי מוחזרות לכאן למסכים גדולים */
+            .lectures { 
+                position: sticky; 
+                top: 75px; /* נדבק ישר מתחת להדר */
+                padding: 4rem 0 6rem; 
+                margin-bottom: 25vh; /* מרווח שנותן לאזור הבא להחליק למעלה ולדרוס אותו */
+            }
+            .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
             
             .audiences { min-height: auto; padding: 6rem 0; box-shadow: 0 -25px 50px rgba(0,0,0,0.5); }
             .audiences-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
@@ -214,6 +219,10 @@
                     <p>אל מול כל הקשיים והנסיבות, אני מביט לאחור ואומר את המילה שפעם נראתה רחוקה מכל דמיון: <strong>"ניצחתי."</strong> זהו ניצחון של הבחירה על הגורל.</p>
                 </div>
             </div>
+        </section>
+
+        <section class="infographic-section reveal-up">
+            <img src="infographic.png" alt="סיפור של שינוי - מנער בסכנה למחנך מנצח">
         </section>
 
         <section id="lectures" class="lectures">
@@ -298,6 +307,7 @@
             </div>
         </section>
 
+         
     </main>
 
     <footer id="contact">
@@ -337,7 +347,7 @@
             }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // פתיחת תפריט נייד (אופציונלי - להשלמה)
+            // פתיחת תפריט נייד
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             menuToggle.addEventListener('click', () => {
@@ -352,25 +362,20 @@
                 navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
             });
 
-            // --- הלוגיקה של שליחת הטופס לווצאפ ---
+            // הלוגיקה של שליחת הטופס לווצאפ
             const waForm = document.getElementById('whatsapp-form');
             waForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // מונע ריענון של העמוד
+                e.preventDefault(); 
 
-                // איסוף הנתונים
                 const name = document.getElementById('wa-name').value;
                 const org = document.getElementById('wa-org').value;
                 const phone  = document.getElementById('wa-phone').value;
                 const message = document.getElementById('wa-message').value;
 
-                // בניית הטקסט שיישלח (משתמשים בקידוד אחוזים כדי לרדת שורה וכו')
                 const text = `היי נדב, הגעתי מהאתר. אשמח לשוחח לגבי הרצאה!%0A%0A*שם:* ${name}%0A*ארגון/מוסד:* ${org}%0A*טלפון שלי:* ${phone}%0A*קצת על הקהל שלנו:* ${message}`;
 
-
-                // טלפון לווצאפ: 
                 const phoneNumber = "972 58-535-2811"; 
 
-                // פתיחת הלינק בחלון חדש (יפתח את האפליקציה בנייד או WhatsApp Web במחשב)
                 const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
                 window.open(waUrl, '_blank');
             });
