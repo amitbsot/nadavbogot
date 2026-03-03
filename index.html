@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bogot360 | נדב בוגט - מהתהום אל קדמת הכיתה</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bronze: #C87941;
             --bronze-hover: #A65F2F;
+            --bronze-dark: #2A1D15; /* ברונזה כהה מאוד לפוטר */
             --espresso: #302621;
             --cream: #FCFAF8;
             --sand: #F3ECE6;
@@ -40,7 +42,7 @@
         .text-center { text-align: center; }
 
         h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; color: #fff; margin-bottom: 1.5rem; }
-        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--espresso); margin-bottom: 2rem; line-height: 1.2; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--espresso); margin-bottom: 2rem; line-height: 1.2; text-align: center; }
         h3 { font-size: 1.4rem; color: var(--espresso); margin-bottom: 0.5rem; }
         p { margin-bottom: 1rem; font-size: 1rem; }
 
@@ -53,7 +55,7 @@
         }
         .btn:hover { background: var(--bronze-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200, 121, 65, 0.35); }
         
-        /* כפתור ווצאפ ספציפי */
+        /* כפתור ווצאפ ספציפי לטופס */
         .btn-whatsapp { background: #25D366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); color: #fff; }
         .btn-whatsapp:hover { background: #1EBE5D; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); }
 
@@ -96,7 +98,7 @@
         .lectures { 
             background: var(--sand); 
             text-align: center; 
-            z-index: 1; /* z-index נמוך כדי לאפשר לאזורים הבאים לעלות עליו */
+            z-index: 1;
             padding: 4rem 0;
             position: relative;
         }
@@ -109,7 +111,7 @@
         /* קהל יעד */
         .audiences { 
             position: relative;
-            z-index: 10; /* מקבל קדימות גבוהה כדי לדרוס את ההרצאות בגלילה */
+            z-index: 10;
             background: var(--espresso); 
             color: var(--cream); 
             text-align: center; 
@@ -124,22 +126,80 @@
         .audience-box h3 { color: var(--bronze); font-size: 1.2rem; margin-bottom: 0.5rem; }
         .audience-box p { color: #E0D6D1; margin: 0; font-size: 0.95rem; }
 
-
         /* אזור תמונה - אינפוגרפיקה */
         .infographic-section { padding: 0; background: var(--espresso); position: relative; z-index: 2; }
         .infographic-section img { width: 100%; height: auto; display: block; border-radius: 0; }
 
-        /* פודקאסט 
-        .podcast { position: relative; z-index: 10; background: var(--cream); padding: 5rem 0; }
-        .podcast-wrapper { max-width: 800px; margin: 2rem auto 0; background: #fff; padding: 1rem; border-radius: calc(var(--radius) + 4px); box-shadow: var(--shadow-md); }
-        .podcast-wrapper iframe { border-radius: var(--radius); }
+        /* --- Testimonials Section --- */
+     /*   #testimonials { background: var(--cream); position: relative; z-index: 10; padding: 5rem 0; }
+        .carousel-container { position: relative; overflow: hidden; padding: 20px 0; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; gap: 20px; }
+        .testimonial-card { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: var(--radius); 
+            box-shadow: var(--shadow-sm);
+            flex: 0 0 100%; /* Mobile: 1 card 
+            text-align: center;
+            border-bottom: 3px solid var(--bronze);
+        }
+        .testimonial-text { font-style: italic; margin-bottom: 1.5rem; color: var(--text-main); }
+        .testimonial-author { font-weight: bold; color: var(--bronze); }
 */
-        /* Footer / Contact */
-        footer { position: relative; z-index: 10; background: var(--sand); color: var(--espresso); padding: 4rem 0 2rem; }
-        .contact-form { background: #fff; padding: 2rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); margin-bottom: 3rem; text-align: center; }
+        /* Contact / Footer Area */
+        #contact { background: var(--sand); position: relative; z-index: 10; padding: 4rem 0 2rem; text-align: center; }
+        
+        /* Grid Buttons Contact */
+        .contact-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+            max-width: 900px; 
+            margin: 3rem auto; 
+        }
+        .contact-method {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .contact-method:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        .contact-icon { font-size: 2.5rem; color: var(--bronze); }
+        .contact-method.whatsapp .contact-icon { color: #25D366; }
+        
+        .btn-contact {
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            width: 100%;
+            display: inline-block;
+        }
+        .bg-whatsapp { background: #25D366; color: white; }
+        .bg-mail { background: var(--espresso); color: white; }
+        .bg-phone { background: var(--bronze); color: white; }
+
+        /* Contact Form */
+        .contact-form { background: #fff; padding: 2rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); margin-bottom: 3rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto; }
         .contact-form form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid #E0D6D1; font-size: 1rem; background: var(--cream); color: var(--espresso); font-family: inherit; }
         .contact-form textarea { resize: vertical; min-height: 100px; }
+
+        /* Final Footer */
+        .main-footer {
+            background: var(--bronze-dark);
+            color: rgba(255,255,255,0.8);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
+        }
+        .main-footer a { color: #fff; font-weight: 600; border-bottom: 1px solid var(--bronze); }
 
         /* Reveal Animation */
         .reveal-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -161,19 +221,19 @@
             .about-image { height: 450px; flex: 1; }
             .about-text { flex: 1; }
             
-            /* הגדרות הסטיקי מוחזרות לכאן למסכים גדולים */
             .lectures { 
                 position: relative; 
-                top: 75px; /* נדבק ישר מתחת להדר */
+                top: 75px; 
                 padding: 4rem 0 6rem; 
-
             }
             .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
             
             .audiences { min-height: auto; padding: 6rem 0; box-shadow: 0 -25px 50px rgba(0,0,0,0.5); }
             .audiences-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
             
-            .contact-form { padding: 3rem; max-width: 600px; margin: 0 auto 4rem; }
+           /* .testimonial-card { flex: 0 0 calc(33.333% - 14px); }*/
+            .contact-grid { grid-template-columns: repeat(3, 1fr); }
+          /*  .contact-form { padding: 3rem; }*/
         }
     </style>
 </head>
@@ -221,8 +281,6 @@
                 </div>
             </div>
         </section>
-
-
 
         <section id="lectures" class="lectures">
             <div class="container">
@@ -309,87 +367,126 @@
          <section class="infographic-section reveal-up">
             <img src="IMG_7922.png" alt="סיפור של שינוי - מנער בסכנה למחנך מנצח">
         </section>
+        
+        <section id="testimonials" class="testimonials-hidden" style="display: none !important;">            <div class="container">
+                <h2>מה אומרים על ההרצאה?</h2>
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"נדב הצליח לגעת בלב של התלמידים שלנו בצורה שאף מרצה לא הצליח לפניו. סיפור מטלטל ומעורר השראה."</p>
+                            <p class="testimonial-author">מנהלת תיכון, מרכז הארץ</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"הכלים הפרקטיים שקיבלנו כצוות חינוכי לזיהוי נורות אזהרה הם נכס לכל מוסד."</p>
+                            <p class="testimonial-author">רכזת חברתית</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"מרתק, כואב ובסוף מלא בתקווה. מומלץ בחום לכל הורה שרוצה להבין את עולמם של הילדים."</p>
+                            <p class="testimonial-author">נציגת ועד הורים</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer id="contact">
+    <section id="contact">
         <div class="container">
-            <div class="contact-form reveal-up">
+            <div class="reveal-up text-center">
                 <h2>הגיע הזמן לבנות את הגשר.</h2>
-                <p>השאירו פרטים ונבנה יחד את ההרצאה המדויקת לקהל שלכם.</p>
-                
-                <form id="whatsapp-form">
-                    <input type="text" id="wa-name" placeholder="שם מלא" required>
-                    <input type="text" id="wa-org" placeholder="שם הארגון / מוסד חינוכי" required>
-                    <input type="tel" id="wa-phone" placeholder="טלפון נייד" required>
-                    <textarea id="wa-message" placeholder="ספרו לי בכמה מילים על הקהל שלכם..."></textarea>
-                    
-                    <button type="submit" class="btn btn-whatsapp">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-                        </svg>
-                        שליחת פרטים לווצאפ
-                    </button>
-                </form>
+                <p>אני זמין עבורכם בכל אחד מהערוצים הבאים, או השאירו פרטים ונבנה יחד את ההרצאה המדויקת לקהל שלכם.</p>
             </div>
+            
+            <div class="contact-grid reveal-up delay-1">
+                <div class="contact-method whatsapp">
+                    <i class="fab fa-whatsapp contact-icon"></i>
+                    <h3>WhatsApp</h3>
+                    <p>הדרך המהירה ביותר לתיאום</p>
+                    <a href="https://wa.me/972585352811?text=היי%20נדב,%20הגעתי%20מהאתר.%20אשמח%20לשוחח%20לגבי%20הרצאה!" target="_blank" class="btn-contact bg-whatsapp">שלחו הודעה</a>
+                </div>
+
+                <div class="contact-method">
+                    <i class="fas fa-envelope contact-icon"></i>
+                    <h3>דואר אלקטרוני</h3>
+                    <p>לפניות רשמיות והזמנות עבודה</p>
+                    <a href="mailto:nbogot360@gmail.com" class="btn-contact bg-mail">nbogot360@gmail.com</a>
+                </div>
+
+                <div class="contact-method">
+                    <i class="fas fa-phone contact-icon"></i>
+                    <h3>שיחה טלפונית</h3>
+                    <p>מענה אנושי לכל שאלה</p>
+                    <a href="tel:0585352811" class="btn-contact bg-phone">058-5352811</a>
+                </div>
+            </div>
+            
+         
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 כל הזכויות שמורות לנדב בוגט | האתר נבנה ע"י <a href="https://wa.me/972546228642?text=היי%20אמיתי%20ראיתי%20את%20האתר%20של%20נדב%20ואני%20מעוניין%20גם" target="_blank">AmitCC</a></p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // אנימציות גלילה
+            
+            // אנימציות גלילה מאוחדות
             const revealElements = document.querySelectorAll('.reveal-up');
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        // הפסקת מעקב לאחר חשיפה כדי למנוע רינדור כפול
                         observer.unobserve(entry.target);
                     }
                 });
             }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             revealElements.forEach(el => revealObserver.observe(el));
 
+        /*    // קרוסלת המלצות
+            const track = document.getElementById('carouselTrack');
+            if (track) {
+                let index = 0;
+                const cardsCount = track.children.length;
+
+                function slide() {
+                    const isMobile = window.innerWidth < 992;
+                    if (isMobile) {
+                        index = (index + 1) % cardsCount;
+                        track.style.transform = `translateX(${index * 100}%)`;
+                    } else {
+                        if (cardsCount > 3) {
+                            index = (index + 1) % (cardsCount - 2);
+                            track.style.transform = `translateX(${index * 33.33}%)`;
+                        }
+                    }
+                }
+                setInterval(slide, 4000);
+            } 
+        */
             // פתיחת תפריט נייד
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
-            menuToggle.addEventListener('click', () => {
-                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '75px';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.background = '#FCFAF8';
-                navLinks.style.padding = '1rem';
-                navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-            });
+            if(menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '75px';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = '#FCFAF8';
+                    navLinks.style.padding = '1rem';
+                    navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                });
+            }
 
-            // הלוגיקה של שליחת הטופס לווצאפ
- const waForm = document.getElementById('whatsapp-form');
-
-waForm.addEventListener('submit', function(e) {
-    e.preventDefault(); 
-
-    const name = document.getElementById('wa-name').value;
-    const org = document.getElementById('wa-org').value;
-    const phone  = document.getElementById('wa-phone').value;
-    const message = document.getElementById('wa-message').value;
-
-    const rawText = `היי נדב, הגעתי מהאתר. אשמח לשוחח לגבי הרצאה!
-
-שם: ${name}
-ארגון/מוסד: ${org}
-טלפון שלי: ${phone}
-קצת על הקהל שלנו: ${message}`;
-
-    const text = encodeURIComponent(rawText);
-
-    const phoneNumber = "972585352811";
-
-    const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
-
-    window.open(waUrl, '_blank');
-    });
-     });
+         
+        });
     </script>
 </body>
 </html>
