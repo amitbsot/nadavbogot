@@ -365,22 +365,30 @@
 
             // הלוגיקה של שליחת הטופס לווצאפ
             const waForm = document.getElementById('whatsapp-form');
-            waForm.addEventListener('submit', function(e) {
-                e.preventDefault(); 
 
-                const name = document.getElementById('wa-name').value;
-                const org = document.getElementById('wa-org').value;
-                const phone  = document.getElementById('wa-phone').value;
-                const message = document.getElementById('wa-message').value;
+waForm.addEventListener('submit', function(e) {
+    e.preventDefault(); 
 
-                const text = `היי נדב, הגעתי מהאתר. אשמח לשוחח לגבי הרצאה!%0A%0A*שם:* ${name}%0A*ארגון/מוסד:* ${org}%0A*טלפון שלי:* ${phone}%0A*קצת על הקהל שלנו:* ${message}`;
+    const name = document.getElementById('wa-name').value;
+    const org = document.getElementById('wa-org').value;
+    const phone  = document.getElementById('wa-phone').value;
+    const message = document.getElementById('wa-message').value;
 
-                const phoneNumber = "972 58-535-2811"; 
+    const rawText = `היי נדב, הגעתי מהאתר. אשמח לשוחח לגבי הרצאה!
 
-                const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
-                window.open(waUrl, '_blank');
-            });
-        });
+שם: ${name}
+ארגון/מוסד: ${org}
+טלפון שלי: ${phone}
+קצת על הקהל שלנו: ${message}`;
+
+    const text = encodeURIComponent(rawText);
+
+    const phoneNumber = "972585352811";
+
+    const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+
+    window.open(waUrl, '_blank');
+});
     </script>
 </body>
 </html>
