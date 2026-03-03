@@ -1,386 +1,381 @@
-‏<!DOCTYPE html>
-‏<html lang="he" dir="rtl">
-‏<head>
-‏    <meta charset="UTF-8">
-‏    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-‏    <title>Bogot360 | נדב בוגט - מהתהום אל קדמת הכיתה</title>
-‏    <style>
-‏        :root {
-‏            --bronze: #C87941;
-‏            --bronze-hover: #A65F2F;
-‏            --espresso: #302621;
-‏            --cream: #FCFAF8;
-‏            --sand: #F3ECE6;
-‏            --text-main: #4A3E38;
-‏            --text-light: #7A6960;
-‏            --radius: 12px;
-‏            --shadow-sm: 0 4px 12px rgba(48, 38, 33, 0.05);
-‏            --shadow-md: 0 10px 30px rgba(48, 38, 33, 0.08);
-‏            --transition: all 0.3s ease;
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bogot360 | נדב בוגט - מהתהום אל קדמת הכיתה</title>
+    <style>
+        :root {
+            --bronze: #C87941;
+            --bronze-hover: #A65F2F;
+            --espresso: #302621;
+            --cream: #FCFAF8;
+            --sand: #F3ECE6;
+            --text-main: #4A3E38;
+            --text-light: #7A6960;
+            --radius: 12px;
+            --shadow-sm: 0 4px 12px rgba(48, 38, 33, 0.05);
+            --shadow-md: 0 10px 30px rgba(48, 38, 33, 0.08);
+            --transition: all 0.3s ease;
         }
 
-‏        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         
-‏        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; }
 
-‏        body {
-‏            overflow-x: clip;
-‏            width: 100%;
-‏            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-‏            background-color: var(--cream);
-‏            color: var(--text-main);
-‏            line-height: 1.6;
-‏            -webkit-font-smoothing: antialiased;
+        body {
+            /* הוסר overflow-x כדי לאפשר לסטיקי לעבוד בכל הדפדפנים בנייד */
+            width: 100%;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--cream);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-‏        a { text-decoration: none; color: inherit; transition: var(--transition); }
-‏        img, iframe { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        img, iframe { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
-‏        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
-‏        .text-center { text-align: center; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .text-center { text-align: center; }
 
-‏        h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; color: #fff; margin-bottom: 1.5rem; }
-‏        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--espresso); margin-bottom: 2rem; line-height: 1.2; }
-‏        h3 { font-size: 1.4rem; color: var(--espresso); margin-bottom: 0.5rem; }
-‏        p { margin-bottom: 1rem; font-size: 1rem; }
+        h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; color: #fff; margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--espresso); margin-bottom: 2rem; line-height: 1.2; }
+        h3 { font-size: 1.4rem; color: var(--espresso); margin-bottom: 0.5rem; }
+        p { margin-bottom: 1rem; font-size: 1rem; }
 
-‏        .btn {
-‏            display: inline-flex; justify-content: center; align-items: center; gap: 8px;
-‏            padding: 14px 28px; background: var(--bronze); color: #fff;
-‏            font-weight: 600; font-size: 1.1rem; border-radius: 50px; border: none;
-‏            cursor: pointer; transition: var(--transition); width: 100%;
-‏            text-align: center; box-shadow: 0 4px 15px rgba(200, 121, 65, 0.25);
+        .btn {
+            display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+            padding: 14px 28px; background: var(--bronze); color: #fff;
+            font-weight: 600; font-size: 1.1rem; border-radius: 50px; border: none;
+            cursor: pointer; transition: var(--transition); width: 100%;
+            text-align: center; box-shadow: 0 4px 15px rgba(200, 121, 65, 0.25);
         }
-‏        .btn:hover { background: var(--bronze-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200, 121, 65, 0.35); }
+        .btn:hover { background: var(--bronze-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(200, 121, 65, 0.35); }
         
         /* כפתור ווצאפ ספציפי */
-‏        .btn-whatsapp { background: #25D366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); color: #fff; }
-‏        .btn-whatsapp:hover { background: #1EBE5D; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); }
+        .btn-whatsapp { background: #25D366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); color: #fff; }
+        .btn-whatsapp:hover { background: #1EBE5D; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); }
 
-‏        section { padding: 4rem 0; }
+        section { padding: 4rem 0; }
 
-‏        /* Header */
-‏        header { background: rgba(252, 250, 248, 0.95); backdrop-filter: blur(10px); box-shadow: var(--shadow-sm); position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 0; height: 75px; display: flex; align-items: center; }
-‏        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-‏        .logo { font-size: 1.5rem; font-weight: 800; color: var(--espresso); }
-‏        .logo span { color: var(--bronze); font-weight: 400; font-size: 1.2rem; }
-‏        .nav-links { display: none; }
-‏        .menu-toggle { display: block; font-size: 1.5rem; color: var(--espresso); cursor: pointer; }
-‏        .header-btn { display: none; }
+        /* Header */
+        header { background: rgba(252, 250, 248, 0.95); backdrop-filter: blur(10px); box-shadow: var(--shadow-sm); position: fixed; top: 0; width: 100%; z-index: 100; padding: 1rem 0; height: 75px; display: flex; align-items: center; }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--espresso); }
+        .logo span { color: var(--bronze); font-weight: 400; font-size: 1.2rem; }
+        .nav-links { display: none; }
+        .menu-toggle { display: block; font-size: 1.5rem; color: var(--espresso); cursor: pointer; }
+        .header-btn { display: none; }
 
-‏        .header-spacer { height: 75px; }
+        .header-spacer { height: 75px; }
 
-‏      /* Hero */
-‏        .hero { 
-‏            background: 
-‏                linear-gradient(135deg, rgba(48, 38, 33, 0.9) 0%, rgba(74, 57, 49, 0.6) 100%),
-‏                url('e082dda5-8a61-4af4-8823-f6079580bcec.jpeg') no-repeat center center;
-‏            background-size: cover;
-‏            color: var(--cream); 
-‏            padding: 4rem 0 5rem; 
-‏            position: relative; 
-‏            text-align: center; 
-‏            z-index: 2; 
+      /* Hero */
+        .hero { 
+            background: 
+                linear-gradient(135deg, rgba(48, 38, 33, 0.9) 0%, rgba(74, 57, 49, 0.6) 100%),
+                url('e082dda5-8a61-4af4-8823-f6079580bcec.jpeg') no-repeat center center;
+            background-size: cover;
+            color: var(--cream); 
+            padding: 4rem 0 5rem; 
+            position: relative; 
+            text-align: center; 
+            z-index: 2; 
         }
-‏        .hero-subtitle { display: block; font-size: 1.1rem; color: var(--bronze); margin-bottom: 1rem; font-weight: 600; }
-‏        .hero p { color: #E0D6D1; font-size: 1.1rem; margin-bottom: 2.5rem; }
-‏        .quote { font-size: 1.3rem; font-style: italic; color: #fff; border-right: 4px solid var(--bronze); padding-right: 15px; margin-bottom: 1.5rem; display: inline-block; }
+        .hero-subtitle { display: block; font-size: 1.1rem; color: var(--bronze); margin-bottom: 1rem; font-weight: 600; }
+        .hero p { color: #E0D6D1; font-size: 1.1rem; margin-bottom: 2.5rem; }
+        .quote { font-size: 1.3rem; font-style: italic; color: #fff; border-right: 4px solid var(--bronze); padding-right: 15px; margin-bottom: 1.5rem; display: inline-block; }
 
         /* אודות */
-‏        .about { position: relative; z-index: 2; background: var(--cream); }
-‏        .about-wrapper { display: flex; flex-direction: column; gap: 2rem; }
-‏        .about-image { background: #e8ded7; width: 100%; height: 300px; object-fit: cover; display: flex; align-items: center; justify-content: center; color: var(--text-light); border-radius: var(--radius); }
-‏        .about-text strong { color: var(--bronze); font-weight: 700; }
+        .about { position: relative; z-index: 2; background: var(--cream); }
+        .about-wrapper { display: flex; flex-direction: column; gap: 2rem; }
+        .about-image { background: #e8ded7; width: 100%; height: 300px; object-fit: cover; display: flex; align-items: center; justify-content: center; color: var(--text-light); border-radius: var(--radius); }
+        .about-text strong { color: var(--bronze); font-weight: 700; }
 
         /* אזור תמונה - אינפוגרפיקה */
-‏        .infographic-section { padding: 0; background: var(--espresso); position: relative; z-index: 2; }
-‏        .infographic-section img { width: 100%; height: auto; display: block; border-radius: 0; }
+        .infographic-section { padding: 0; background: var(--espresso); position: relative; z-index: 2; }
+        .infographic-section img { width: 100%; height: auto; display: block; border-radius: 0; }
 
-        /* אזור ההרצאות */
-‏        .lectures { 
-‏            background: var(--sand); 
-‏            text-align: center; 
-‏            z-index: 1; /* z-index נמוך כדי לאפשר לאזורים הבאים לעלות עליו */
-‏            padding: 4rem 0;
-‏            position: relative;
+        /* אזור ההרצאות - תוקן לסטיקי גם בנייד */
+        .lectures { 
+            background: var(--sand); 
+            text-align: center; 
+            z-index: 1; /* z-index נמוך כדי לאפשר לאזורים הבאים לעלות עליו */
+            padding: 4rem 0;
+            position: sticky;
+            bottom: 0; /* במובייל - נדבק לתחתית המסך כדי לאפשר גלילה של כל הכרטיסיות לפני הדריסה */
+            margin-bottom: 15vh; /* מרווח כדי ליצור את אפקט הדריסה */
         }
         
-‏        .cards-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
-‏        .card { background: var(--cream); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-md); text-align: right; border-top: 4px solid var(--bronze); }
-‏        .card .target-audience { display: inline-block; background: rgba(200, 121, 65, 0.1); color: var(--bronze); font-weight: 600; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 1rem; }
-‏        .lectures-subtitle { color: var(--text-light); font-size: 1.1rem; margin-top: -1rem; margin-bottom: 2rem; }
+        .cards-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .card { background: var(--cream); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-md); text-align: right; border-top: 4px solid var(--bronze); }
+        .card .target-audience { display: inline-block; background: rgba(200, 121, 65, 0.1); color: var(--bronze); font-weight: 600; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .lectures-subtitle { color: var(--text-light); font-size: 1.1rem; margin-top: -1rem; margin-bottom: 2rem; }
 
         /* קהל יעד */
-‏        .audiences { 
-‏            position: relative;
-‏            z-index: 10; /* מקבל קדימות גבוהה כדי לדרוס את ההרצאות בגלילה */
-‏            background: var(--espresso); 
-‏            color: var(--cream); 
-‏            text-align: center; 
-‏            padding: 5rem 0;
-‏            box-shadow: 0 -15px 30px rgba(0,0,0,0.3); 
+        .audiences { 
+            position: relative;
+            z-index: 10; /* מקבל קדימות גבוהה כדי לדרוס את ההרצאות בגלילה */
+            background: var(--espresso); 
+            color: var(--cream); 
+            text-align: center; 
+            padding: 5rem 0;
+            box-shadow: 0 -15px 30px rgba(0,0,0,0.3); 
         }
         
-‏        .audiences h2 { color: #fff; }
-‏        .audiences p { color: #D0C5BF; margin-bottom: 3rem; font-size: 1.1rem; }
-‏        .audiences-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; text-align: right; }
-‏        .audience-box { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
-‏        .audience-box h3 { color: var(--bronze); font-size: 1.2rem; margin-bottom: 0.5rem; }
-‏        .audience-box p { color: #E0D6D1; margin: 0; font-size: 0.95rem; }
+        .audiences h2 { color: #fff; }
+        .audiences p { color: #D0C5BF; margin-bottom: 3rem; font-size: 1.1rem; }
+        .audiences-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; text-align: right; }
+        .audience-box { background: rgba(255,255,255,0.05); padding: 1.5rem; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
+        .audience-box h3 { color: var(--bronze); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .audience-box p { color: #E0D6D1; margin: 0; font-size: 
+        /* Footer / Contact */
+        footer { position: relative; z-index: 10; background: var(--sand); color: var(--espresso); padding: 4rem 0 2rem; }
+        .contact-form { background: #fff; padding: 2rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); margin-bottom: 3rem; text-align: center; }
+        .contact-form form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid #E0D6D1; font-size: 1rem; background: var(--cream); color: var(--espresso); font-family: inherit; }
+        .contact-form textarea { resize: vertical; min-height: 100px; }
 
-        /* פודקאסט 
-‏        .podcast { position: relative; z-index: 10; background: var(--cream); padding: 5rem 0; }
-‏        .podcast-wrapper { max-width: 800px; margin: 2rem auto 0; background: #fff; padding: 1rem; border-radius: calc(var(--radius) + 4px); box-shadow: var(--shadow-md); }
-‏        .podcast-wrapper iframe { border-radius: var(--radius); }
-*/
-‏        /* Footer / Contact */
-‏        footer { position: relative; z-index: 10; background: var(--sand); color: var(--espresso); padding: 4rem 0 2rem; }
-‏        .contact-form { background: #fff; padding: 2rem 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow-md); margin-bottom: 3rem; text-align: center; }
-‏        .contact-form form { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-‏        .contact-form input, .contact-form textarea { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid #E0D6D1; font-size: 1rem; background: var(--cream); color: var(--espresso); font-family: inherit; }
-‏        .contact-form textarea { resize: vertical; min-height: 100px; }
+        /* Reveal Animation */
+        .reveal-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
 
-‏        /* Reveal Animation */
-‏        .reveal-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-‏        .reveal-up.active { opacity: 1; transform: translateY(0); }
-‏        .delay-1 { transition-delay: 0.1s; }
-‏        .delay-2 { transition-delay: 0.2s; }
-
-‏        /* --- Media Queries (Desktop) --- */
-‏        @media (min-width: 992px) {
-‏            .menu-toggle { display: none; }
-‏            .nav-links { display: flex; gap: 2rem; font-weight: 500; }
-‏            .header-btn { display: inline-flex; width: auto; padding: 10px 24px; font-size: 1rem; }
+        /* --- Media Queries (Desktop) --- */
+        @media (min-width: 992px) {
+            .menu-toggle { display: none; }
+            .nav-links { display: flex; gap: 2rem; font-weight: 500; }
+            .header-btn { display: inline-flex; width: auto; padding: 10px 24px; font-size: 1rem; }
             
-‏            .hero { text-align: right; padding: 8rem 0; }
-‏            .hero .container { display: flex; flex-direction: column; align-items: flex-start; max-width: 800px; margin: 0 auto; }
-‏            .hero .btn { width: auto; }
+            .hero { text-align: right; padding: 8rem 0; }
+            .hero .container { display: flex; flex-direction: column; align-items: flex-start; max-width: 800px; margin: 0 auto; }
+            .hero .btn { width: auto; }
             
-‏            .about-wrapper { flex-direction: row; align-items: center; gap: 4rem; }
-‏            .about-image { height: 450px; flex: 1; }
-‏            .about-text { flex: 1; }
+            .about-wrapper { flex-direction: row; align-items: center; gap: 4rem; }
+            .about-image { height: 450px; flex: 1; }
+            .about-text { flex: 1; }
             
-            /* הגדרות הסטיקי מוחזרות לכאן למסכים גדולים */
-‏            .lectures { 
-‏                position: sticky; 
-‏                top: 75px; /* נדבק ישר מתחת להדר */
-‏                padding: 4rem 0 6rem; 
-‏                margin-bottom: 25vh; /* מרווח שנותן לאזור הבא להחליק למעלה ולדרוס אותו */
+            /* עדכון סטיקי למסכים גדולים - נדבק למעלה כי התוכן נכנס במסך */
+            .lectures { 
+                top: 75px; 
+                bottom: auto; /* מבטל את ההידבקות לתחתית מהמובייל */
+                padding: 4rem 0 6rem; 
+                margin-bottom: 25vh; 
             }
-‏            .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
             
-‏            .audiences { min-height: auto; padding: 6rem 0; box-shadow: 0 -25px 50px rgba(0,0,0,0.5); }
-‏            .audiences-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .audiences { min-height: auto; padding: 6rem 0; box-shadow: 0 -25px 50px rgba(0,0,0,0.5); }
+            .audiences-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
             
-‏            .contact-form { padding: 3rem; max-width: 600px; margin: 0 auto 4rem; }
+            .contact-form { padding: 3rem; max-width: 600px; margin: 0 auto 4rem; }
         }
-‏    </style>
-‏</head>
-‏<body>
+    </style>
+</head>
+<body>
 
-‏    <header>
-‏        <div class="container nav-wrapper">
-‏            <div class="logo">נדב בוגט <span>| Bogot360</span></div>
-‏            <div class="menu-toggle">☰</div>
-‏            <nav class="nav-links">
-‏                <a href="#about">הסיפור שלי</a>
-‏                <a href="#lectures">נושאי הרצאות והדרכות</a>
-‏                <a href="#audiences">למי זה מתאים?</a>
-‏                <a href="#contact">יצירת קשר</a>
-‏            </nav>
-‏            <a href="#contact" class="btn header-btn">לתיאום הרצאה</a>
-‏        </div>
-‏    </header>
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">נדב בוגט <span>| Bogot360</span></div>
+            <div class="menu-toggle">☰</div>
+            <nav class="nav-links">
+                <a href="#about">הסיפור שלי</a>
+                <a href="#lectures">נושאי הרצאות והדרכות</a>
+                <a href="#audiences">למי זה מתאים?</a>
+                <a href="#contact">יצירת קשר</a>
+            </nav>
+            <a href="#contact" class="btn header-btn">לתיאום הרצאה</a>
+        </div>
+    </header>
     
-‏    <div class="header-spacer"></div>
+    <div class="header-spacer"></div>
 
-‏    <main>
+    <main>
         
-‏        <section class="hero reveal-up">
-‏            <div class="container">
-‏                <span class="hero-subtitle">נדב בוגט – מרצה, איש חינוך ומנטור</span>
-‏                <h1>מהתהום אל קדמת הכיתה.</h1>
-‏                <span class="quote">"הדרך משתנה כשסומכים על מי שרוצה בטובתך"</span>
-‏                <p>מנער רחוב שנפלט מכל מסגרת, עבר דרך חיי פשע ומאסר – ועד לחזרה לאותן המסגרות כמחנך וכדמות סמכות מובילה.<br>אני כאן כדי לשרטט עבור בני הנוער והצוותים את מפת הדרכים חזרה למעלה.</p>
-‏                <a href="#contact" class="btn">לתיאום הרצאה שמשנה חיים</a>
-‏            </div>
-‏        </section>
+        <section class="hero reveal-up">
+            <div class="container">
+                <span class="hero-subtitle">נדב בוגט – מרצה, איש חינוך ומנטור</span>
+                <h1>מהתהום אל קדמת הכיתה.</h1>
+                <span class="quote">"הדרך משתנה כשסומכים על מי שרוצה בטובתך"</span>
+                <p>מנער רחוב שנפלט מכל מסגרת, עבר דרך חיי פשע ומאסר – ועד לחזרה לאותן המסגרות כמחנך וכדמות סמכות מובילה.<br>אני כאן כדי לשרטט עבור בני הנוער והצוותים את מפת הדרכים חזרה למעלה.</p>
+                <a href="#contact" class="btn">לתיאום הרצאה שמשנה חיים</a>
+            </div>
+        </section>
 
-‏        <section id="about" class="about">
-‏            <div class="container about-wrapper">
-‏                <div class="about-image-wrapper reveal-up">
-‏                    <img src="IMG_7916.jpeg" alt="נדב בוגט מרצה" class="about-image">
-‏                </div>
-‏                <div class="about-text reveal-up delay-1">
-‏                    <h2>הסיפור שלי: תעודת זהות ללא פילטרים</h2>
-‏                    <p>אני לא רק מרצה; אני כאן כדי לשרטט עבור בני הנוער והצוותים שמלווים אותם את מפת הדרכים חזרה מהתהום. הסיפור שלי הוא עדות עוצמתית לטרנספורמציה בלתי אפשרית לכאורה.</p>
-‏                    <p>כילד שגדל בצל האימוץ והתמודד עם תחושת חוסר שייכות עמוקה, מצאתי את עצמי מהר מאוד במסלול של הרס עצמי. מנער שנפלט מכל מסגרת, עברתי דרך חיי רחוב והגעתי עד למאסר.</p>
-‏                    <p>אבל נקודת המפנה שלי הייתה הבחירה האקטיבית בחיים ובאמונה במערכת. רגע השיא בסיפור הוא חזרתי למסגרת "בית הצייר" – המקום שבו שהיתי כנער בסיכון – אך הפעם, כאיש חינוך מן המניין המדריך את הדור הבא.</p>
-‏                    <p>אל מול כל הקשיים והנסיבות, אני מביט לאחור ואומר את המילה שפעם נראתה רחוקה מכל דמיון: <strong>"ניצחתי."</strong> זהו ניצחון של הבחירה על הגורל.</p>
-‏                </div>
-‏            </div>
-‏        </section>
+        <section id="about" class="about">
+            <div class="container about-wrapper">
+                <div class="about-image-wrapper reveal-up">
+                    <img src="IMG_7916.jpeg" alt="נדב בוגט מרצה" class="about-image">
+                </div>
+                <div class="about-text reveal-up delay-1">
+                    <h2>הסיפור שלי: תעודת זהות ללא פילטרים</h2>
+                    <p>אני לא רק מרצה; אני כאן כדי לשרטט עבור בני הנוער והצוותים שמלווים אותם את מפת הדרכים חזרה מהתהום. הסיפור שלי הוא עדות עוצמתית לטרנספורמציה בלתי אפשרית לכאורה.</p>
+                    <p>כילד שגדל בצל האימוץ והתמודד עם תחושת חוסר שייכות עמוקה, מצאתי את עצמי מהר מאוד במסלול של הרס עצמי. מנער שנפלט מכל מסגרת, עברתי דרך חיי רחוב והגעתי עד למאסר.</p>
+                    <p>אבל נקודת המפנה שלי הייתה הבחירה האקטיבית בחיים ובאמונה במערכת. רגע השיא בסיפור הוא חזרתי למסגרת "בית הצייר" – המקום שבו שהיתי כנער בסיכון – אך הפעם, כאיש חינוך מן המניין המדריך את הדור הבא.</p>
+                    <p>אל מול כל הקשיים והנסיבות, אני מביט לאחור ואומר את המילה שפעם נראתה רחוקה מכל דמיון: <strong>"ניצחתי."</strong> זהו ניצחון של הבחירה על הגורל.</p>
+                </div>
+            </div>
+        </section>
 
-‏        <section class="infographic-section reveal-up">
-‏            <img src="infographic.png" alt="סיפור של שינוי - מנער בסכנה למחנך מנצח">
-‏        </section>
+        <section class="infographic-section reveal-up">
+            <img src="infographic.png" alt="סיפור של שינוי - מנער בסכנה למחנך מנצח">
+        </section>
 
-‏        <section id="lectures" class="lectures">
-‏            <div class="container">
-‏                <h2 class="reveal-up">ניסיון חיים פוגש פרקטיקה: נושאי הרצאות והדרכות</h2>
-‏                <p class="lectures-subtitle reveal-up">מגוון הרצאות, סדנאות והשתלמויות המותאמות לבני נוער, צוותי חינוך והורים.</p>
+        <section id="lectures" class="lectures">
+            <div class="container">
+                <h2 class="reveal-up">ניסיון חיים פוגש פרקטיקה: נושאי הרצאות והדרכות</h2>
+                <p class="lectures-subtitle reveal-up">מגוון הרצאות, סדנאות והשתלמויות המותאמות לבני נוער, צוותי חינוך והורים.</p>
                 
-‏                <div class="cards-grid">
-‏                    <div class="card reveal-up delay-1">
-‏                        <span class="target-audience">זהות ושייכות</span>
-‏                        <h3>לעגן את הלב</h3>
-‏                        <p>התמודדות עם מורכבות עולם האימוץ והאומנה, ותקווה למי שמרגיש תחושת חריגות ובדידות עמוקה.</p>
-‏                    </div>
-‏                    <div class="card reveal-up delay-2">
-‏                        <span class="target-audience">צמיחה ממשבר</span>
-‏                        <h3>לבחור בחיים</h3>
-‏                        <p>בניית חוסן מנטלי, בחירה אקטיבית בחיים, והכלים לשיקום האמון העצמי שאבד.</p>
-‏                    </div>
-‏                    <div class="card reveal-up delay-1">
-‏                        <span class="target-audience">קשיים רגשיים</span>
-‏                        <h3>לגשר על חוסר האמון</h3>
-‏                        <p>התמודדות עם חוסר אמון בממסד, קשיי תקשורת עם סמכות, ואלימות ככלי ביטוי.</p>
-‏                    </div>
+                <div class="cards-grid">
+                    <div class="card reveal-up delay-1">
+                        <span class="target-audience">זהות ושייכות</span>
+                        <h3>לעגן את הלב</h3>
+                        <p>התמודדות עם מורכבות עולם האימוץ והאומנה, ותקווה למי שמרגיש תחושת חריגות ובדידות עמוקה.</p>
+                    </div>
+                    <div class="card reveal-up delay-2">
+                        <span class="target-audience">צמיחה ממשבר</span>
+                        <h3>לבחור בחיים</h3>
+                        <p>בניית חוסן מנטלי, בחירה אקטיבית בחיים, והכלים לשיקום האמון העצמי שאבד.</p>
+                    </div>
+                    <div class="card reveal-up delay-1">
+                        <span class="target-audience">קשיים רגשיים</span>
+                        <h3>לגשר על חוסר האמון</h3>
+                        <p>התמודדות עם חוסר אמון בממסד, קשיי תקשורת עם סמכות, ואלימות ככלי ביטוי.</p>
+                    </div>
 
-‏                    <div class="card reveal-up delay-2">
-‏                        <span class="target-audience">זיהוי מוקדם</span>
-‏                        <h3>נורות אזהרה בדרך</h3>
-‏                        <p>איתור סימנים מוקדמים של מצוקה, נשירה ממסגרות, שינויי התנהגות פתאומיים, נסיגה חברתית ודיכאון אצל בני נוער.</p>
-‏                    </div>
-‏                    <div class="card reveal-up delay-1">
-‏                        <span class="target-audience">התנהגות מסכנת</span>
-‏                        <h3>לעצור את כדור השלג</h3>
-‏                        <p>הבנת גורמי ההידרדרות לעבריינות, חיי רחוב, ושימוש בחומרים (סמים ואלכוהול). התמודדות מול התנהגות מינית סיכונית.</p>
-‏                    </div>
-‏                     <div class="card reveal-up delay-2">
-‏                        <span class="target-audience">מניעה והתערבות</span>
-‏                        <h3>כלים של הצלה</h3>
-‏                        <p>אסטרטגיות התערבות וגישות טיפוליות. קביעת גבולות ויצירת סביבה בטוחה ומובנית. התערבות מצילת-חיים במצבי אובדנות.</p>
-‏                    </div>
-‏                    <div class="card reveal-up delay-1">
-‏                        <span class="target-audience">המרחב החברתי</span>
-‏                        <h3>מעגלים של פגיעות</h3>
-‏                        <p>התמודדות עם קושי חברתי, בידוד וחוסר שייכות. כלים מעשיים למניעת חרמות, אלימות ודחייה חברתית.</p>
-‏                    </div>
-‏                    <div class="card reveal-up delay-2">
-‏                        <span class="target-audience">הסביבה הדיגיטלית</span>
-‏                        <h3>סכנות במרחב הווירטואלי</h3>
-‏                        <p>הבנת עולמם של בני הנוער ברשת: זיהוי ומניעה של בריונות דיגיטלית, ופגיעות המתרחשות הרחק מעיני המבוגרים.</p>
-‏                    </div>
-‏                    <div class="card reveal-up delay-1">
-‏                        <span class="target-audience">לצוותי חינוך וטיפול</span>
-‏                        <h3>עבודה מערכתית מקדמת</h3>
-‏                        <p>פיתוח מקצועי והתעדכנות בגישות חדשות לטיפול בנוער. חשיבות שיתוף הפעולה הרב-מערכתי ויצירת רשת תמיכה הדוקה.</p>
-‏                    </div>
-‏                </div>
-‏            </div>
-‏        </section>
+                    <div class="card reveal-up delay-2">
+                        <span class="target-audience">זיהוי מוקדם</span>
+                        <h3>נורות אזהרה בדרך</h3>
+                        <p>איתור סימנים מוקדמים של מצוקה, נשירה ממסגרות, שינויי התנהגות פתאומיים, נסיגה חברתית ודיכאון אצל בני נוער.</p>
+                    </div>
+                    <div class="card reveal-up delay-1">
+                        <span class="target-audience">התנהגות מסכנת</span>
+                        <h3>לעצור את כדור השלג</h3>
+                        <p>הבנת גורמי ההידרדרות לעבריינות, חיי רחוב, ושימוש בחומרים (סמים ואלכוהול). התמודדות מול התנהגות מינית סיכונית.</p>
+                    </div>
+                     <div class="card reveal-up delay-2">
+                        <span class="target-audience">מניעה והתערבות</span>
+                        <h3>כלים של הצלה</h3>
+                        <p>אסטרטגיות התערבות וגישות טיפוליות. קביעת גבולות ויצירת סביבה בטוחה ומובנית. התערבות מצילת-חיים במצבי אובדנות.</p>
+                    </div>
+                    <div class="card reveal-up delay-1">
+                        <span class="target-audience">המרחב החברתי</span>
+                        <h3>מעגלים של פגיעות</h3>
+                        <p>התמודדות עם קושי חברתי, בידוד וחוסר שייכות. כלים מעשיים למניעת חרמות, אלימות ודחייה חברתית.</p>
+                    </div>
+                    <div class="card reveal-up delay-2">
+                        <span class="target-audience">הסביבה הדיגיטלית</span>
+                        <h3>סכנות במרחב הווירטואלי</h3>
+                        <p>הבנת עולמם של בני הנוער ברשת: זיהוי ומניעה של בריונות דיגיטלית, ופגיעות המתרחשות הרחק מעיני המבוגרים.</p>
+                    </div>
+                    <div class="card reveal-up delay-1">
+                        <span class="target-audience">לצוותי חינוך וטיפול</span>
+                        <h3>עבודה מערכתית מקדמת</h3>
+                        <p>פיתוח מקצועי והתעדכנות בגישות חדשות לטיפול בנוער. חשיבות שיתוף הפעולה הרב-מערכתי ויצירת רשת תמיכה הדוקה.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-‏        <section id="audiences" class="audiences">
-‏            <div class="container audiences-content reveal-up">
-‏                <h2>למי ההרצאה מתאימה?</h2>
-‏                <p>התוכן מותאם אישית לכל קבוצה, מתוך הבנה של הצרכים הייחודיים בשטח:</p>
+        <section id="audiences" class="audiences">
+            <div class="container audiences-content reveal-up">
+                <h2>למי ההרצאה מתאימה?</h2>
+                <p>התוכן מותאם אישית לכל קבוצה, מתוך הבנה של הצרכים הייחודיים בשטח:</p>
                 
-‏                <div class="audiences-grid">
-‏                    <div class="audience-box reveal-up delay-1">
-‏                        <h3>בני נוער וצעירים</h3>
-‏                        <p>בבתי ספר, פנימיות, מכינות קדם-צבאיות, מרכזי נוער קהילתיים ותנועות נוער.</p>
-‏                    </div>
-‏                    <div class="audience-box reveal-up delay-1">
-‏                        <h3>צוותי חינוך וטיפול</h3>
-‏                        <p>הרצאות והשתלמויות לאנשי חינוך, מדריכים חינוכיים, עובדים סוציאליים וצוותי פנימיות.</p>
-‏                    </div>
-‏                    <div class="audience-box reveal-up delay-2">
-‏                        <h3>ארגונים ומגזר ציבורי</h3>
-‏                        <p>עמותות חברתיות, גופים ומוסדות העוסקים בשיקום ובקידום נוער בסיכון.</p>
-‏                    </div>
-‏                    <div class="audience-box reveal-up delay-2">
-‏                        <h3>הורים</h3>
-‏                        <p>מפגשים המעניקים הצצה כנה לעולמם של בני נוער בסיכון וכלים ליצירת שפה משותפת ואמון.</p>
-‏                    </div>
-‏                </div>
-‏            </div>
-‏        </section>
+                <div class="audiences-grid">
+                    <div class="audience-box reveal-up delay-1">
+                        <h3>בני נוער וצעירים</h3>
+                        <p>בבתי ספר, פנימיות, מכינות קדם-צבאיות, מרכזי נוער קהילתיים ותנועות נוער.</p>
+                    </div>
+                    <div class="audience-box reveal-up delay-1">
+                        <h3>צוותי חינוך וטיפול</h3>
+                        <p>הרצאות והשתלמויות לאנשי חינוך, מדריכים חינוכיים, עובדים סוציאליים וצוותי פנימיות.</p>
+                    </div>
+                    <div class="audience-box reveal-up delay-2">
+                        <h3>ארגונים ומגזר ציבורי</h3>
+                        <p>עמותות חברתיות, גופים ומוסדות העוסקים בשיקום ובקידום נוער בסיכון.</p>
+                    </div>
+                    <div class="audience-box reveal-up delay-2">
+                        <h3>הורים</h3>
+                        <p>מפגשים המעניקים הצצה כנה לעולמם של בני נוער בסיכון וכלים ליצירת שפה משותפת ואמון.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+            
 
-‏     
+    </main>
 
-‏    </main>
-
-‏    <footer id="contact">
-‏        <div class="container">
-‏            <div class="contact-form reveal-up">
-‏                <h2>הגיע הזמן לבנות את הגשר.</h2>
-‏                <p>השאירו פרטים ונבנה יחד את ההרצאה המדויקת לקהל שלכם.</p>
+    <footer id="contact">
+        <div class="container">
+            <div class="contact-form reveal-up">
+                <h2>הגיע הזמן לבנות את הגשר.</h2>
+                <p>השאירו פרטים ונבנה יחד את ההרצאה המדויקת לקהל שלכם.</p>
                 
-‏                <form id="whatsapp-form">
-‏                    <input type="text" id="wa-name" placeholder="שם מלא" required>
-‏                    <input type="text" id="wa-org" placeholder="שם הארגון / מוסד חינוכי" required>
-‏                    <input type="tel" id="wa-phone" placeholder="טלפון נייד" required>
-‏                    <textarea id="wa-message" placeholder="ספרו לי בכמה מילים על הקהל שלכם..."></textarea>
+                <form id="whatsapp-form">
+                    <input type="text" id="wa-name" placeholder="שם מלא" required>
+                    <input type="text" id="wa-org" placeholder="שם הארגון / מוסד חינוכי" required>
+                    <input type="tel" id="wa-phone" placeholder="טלפון נייד" required>
+                    <textarea id="wa-message" placeholder="ספרו לי בכמה מילים על הקהל שלכם..."></textarea>
                     
-‏                    <button type="submit" class="btn btn-whatsapp">
-‏                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-‏                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-‏                        </svg>
+                    <button type="submit" class="btn btn-whatsapp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                        </svg>
                         שליחת פרטים לווצאפ
-‏                    </button>
-‏                </form>
-‏            </div>
-‏        </div>
-‏    </footer>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </footer>
 
-‏    <script>
-‏        document.addEventListener('DOMContentLoaded', () => {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             // אנימציות גלילה
-‏            const revealElements = document.querySelectorAll('.reveal-up');
-‏            const revealObserver = new IntersectionObserver((entries, observer) => {
-‏                entries.forEach(entry => {
-‏                    if (entry.isIntersecting) {
-‏                        entry.target.classList.add('active');
-‏                        observer.unobserve(entry.target);
+            const revealElements = document.querySelectorAll('.reveal-up');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
                     }
                 });
-‏            }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-‏            revealElements.forEach(el => revealObserver.observe(el));
+            }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            revealElements.forEach(el => revealObserver.observe(el));
 
             // פתיחת תפריט נייד
-‏            const menuToggle = document.querySelector('.menu-toggle');
-‏            const navLinks = document.querySelector('.nav-links');
-‏            menuToggle.addEventListener('click', () => {
-‏                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-‏                navLinks.style.flexDirection = 'column';
-‏                navLinks.style.position = 'absolute';
-‏                navLinks.style.top = '75px';
-‏                navLinks.style.left = '0';
-‏                navLinks.style.width = '100%';
-‏                navLinks.style.background = '#FCFAF8';
-‏                navLinks.style.padding = '1rem';
-‏                navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            menuToggle.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '75px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = '#FCFAF8';
+                navLinks.style.padding = '1rem';
+                navLinks.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
             });
 
             // הלוגיקה של שליחת הטופס לווצאפ
-‏            const waForm = document.getElementById('whatsapp-form');
-‏            waForm.addEventListener('submit', function(e) {
-‏                e.preventDefault(); 
+            const waForm = document.getElementById('whatsapp-form');
+            waForm.addEventListener('submit', function(e) {
+                e.preventDefault(); 
 
-‏                const name = document.getElementById('wa-name').value;
-‏                const org = document.getElementById('wa-org').value;
-‏                const phone  = document.getElementById('wa-phone').value;
-‏                const message = document.getElementById('wa-message').value;
+                const name = document.getElementById('wa-name').value;
+                const org = document.getElementById('wa-org').value;
+                const phone  = document.getElementById('wa-phone').value;
+                const message = document.getElementById('wa-message').value;
 
-‏                const text = `היי נדב, הגעתי מהאתר. אשמח לשוחח לגבי הרצאה!%0A%0A*שם:* ${name}%0A*ארגון/מוסד:* ${org}%0A*טלפון שלי:* ${phone}%0A*קצת על הקהל שלנו:* ${message}`;
+                const text = `היי נדב, הגעתי מהאתר. אשמח לשוחח לגבי הרצאה!%0A%0A*שם:* ${name}%0A*ארגון/מוסד:* ${org}%0A*טלפון שלי:* ${phone}%0A*קצת על הקהל שלנו:* ${message}`;
 
-‏                const phoneNumber = "972 58-535-2811"; 
+                const phoneNumber = "972 58-535-2811"; 
 
-‏                const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
-‏                window.open(waUrl, '_blank');
+                const waUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+                window.open(waUrl, '_blank');
             });
         });
-‏    </script>
-‏</body>
-‏</html>
+    </script>
+</body>
+</html>
