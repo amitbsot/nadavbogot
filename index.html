@@ -26,15 +26,24 @@
         html { scroll-behavior: smooth; }
 
         body {
-            overflow-x: clip;
-            width: 100%;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--cream);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+    
+      overflow-x: clip;
+    width: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--cream);
+    color: var(--text-main);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* התוספת שדואגת שהפוטר תמיד יהיה למטה */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vhd;
+}
 
+/* זה יגרום לאזור המרכזי לתפוס את כל המקום הפנוי ולדחוף את הפוטר למטה */
+main {
+    flex: 1;
+}
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         img, iframe { max-width: 100%; height: auto; display: block; border-radius: var(--radius); }
 
@@ -209,17 +218,29 @@
             transform: scale(1.05) translateY(-5px);
         }
 
-        /* Final Footer */
-        .main-footer {
-            background: var(--bronze);
-            color: rgba(255,255,255,0.8);
-            padding: 1rem 0;
-            text-align: center;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 10;
-        }
-        .main-footer a { color: #fff; font-weight: 600; border-bottom: 1px solid var(--bronze); }
+/* Final Footer */
+.main-footer {
+    background: var(--bronze);
+    color: rgba(255,255,255,0.8);
+    padding: 0.4rem 0; /* הקטנו את הריווח הפנימי למינימום */
+    text-align: center;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 10;
+    margin-top: auto; /* מוודא שהפוטר נצמד למטה */
+}
+
+.main-footer a { 
+    color: #fff; 
+    font-weight: 600; 
+    border-bottom: 1px solid var(--bronze); 
+}
+
+/* איפוס מרווחים לטקסט בתוך הפוטר כדי שלא יוסיף גובה מיותר */
+.main-footer p {
+    margin: 0;
+    padding: 0;
+}
 
         /* Reveal Animation */
         .reveal-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
