@@ -150,7 +150,7 @@ main {
                   padding: 4rem auto; 
                   text-align: center;
                  }
-        
+
         .contact-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
@@ -186,6 +186,8 @@ main {
             direction: ltr; 
         }
         .contact-link:hover { color: var(--bronze); }
+        .bg-mail {visibility: hidden;}
+        .bg-phone {visibility: hidden;}
 
         /* WhatsApp Floating Button */
         .floating-wa {
@@ -424,13 +426,13 @@ main {
                     <a href="mailto:nbogot360@gmail.com" class="contact-method" style="text-decoration: none; color: inherit;">
                         <i class="fas fa-envelope contact-icon"></i>
                         <h3>nbogot360@gmail.com</h3>
-                        <span class="btn-contact bg-mail hidden">nbogot360@gmail.com</span>
+                        <span class="btn-contact bg-mail">nbogot360@gmail.com</span>
                     </a>
 
                     <a href="tel:0585352811" class="contact-method" style="text-decoration: none; color: inherit;">
                         <i class="fas fa-phone contact-icon"></i>
                         <h3>058-5352811</h3>
-                        <span class="btn-contact bg-phone hidden">058-5352811</span>
+                        <span class="btn-contact bg-phone">058-5352811</span>
                     </a>
                 </div>
             </div>
