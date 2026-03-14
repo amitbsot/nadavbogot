@@ -189,6 +189,11 @@
         .testimonials-track:hover {
             animation-play-state: paused;
         }
+         /* מצב השהיה מותאם אישית למסכי מגע */
+.testimonials-track.is-paused,
+.logo-slide-track.is-paused {
+    animation-play-state: paused !important;
+}
 
         .testimonials-set {
             display: flex;
@@ -754,6 +759,25 @@
             const closeModalBtn = document.querySelector('.close-modal');
             const modalText = document.getElementById('modalText');
             const modalAuthor = document.getElementById('modalAuthor');
+                        // --- טיפול בעצירת הקרוסלות במובייל (לחיצה רצופה) ---
+            const carouselTracks = document.querySelectorAll('.testimonials-track, .logo-slide-track');
+            
+            carouselTracks.forEach(track => {
+                // כשהאצבע נוגעת במסך - עוצרים
+                track.addEventListener('touchstart', () => {
+                    track.classList.add('is-paused');
+                }, { passive: true });
+                
+                // כשהאצבע מתרוממת מהמסך - ממשיכים
+                track.addEventListener('touchend', () => {
+                    track.classList.remove('is-paused');
+                }, { passive: true });
+                
+                // ליתר ביטחון, אם המגע בוטל (למשל גלילה פתאומית)
+                track.addEventListener('touchcancel', () => {
+                    track.classList.remove('is-paused');
+                }, { passive: true });
+            });
 
             // פתיחת החלון
             document.querySelectorAll('.read-more-btn').forEach(btn => {
