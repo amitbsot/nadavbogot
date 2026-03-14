@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bogot360 | נדב בוגט - מהתהום אל קדמת הכיתה</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --bronze: #C87941;
@@ -40,6 +41,10 @@
             padding: 0 !important;
         }
 
+        body.modal-open {
+            overflow: hidden; /* מונע גלילה של האתר כשחלון הביקורת פתוח */
+        }
+
         main { flex: 1; flex-shrink: 0; }
 
         a { text-decoration: none; color: inherit; transition: var(--transition); }
@@ -72,7 +77,6 @@
         .nav-links { display: none; }
         .menu-toggle { display: block; font-size: 1.5rem; color: var(--espresso); cursor: pointer; }
         .header-btn { display: none; }
-
         .header-spacer { height: 75px; }
 
         /* Hero */
@@ -97,234 +101,46 @@
         .about-image { background: #e8ded7; width: 100%; height: 300px; object-fit: cover; display: flex; align-items: center; justify-content: center; color: var(--text-light); border-radius: var(--radius); }
         .about-text strong { color: var(--bronze); font-weight: 700; }
 
-        /* --- Credentials Section (הכשרה וניסיון) --- */
-        .credentials {
-            background: #fff;
-            position: relative;
-            z-index: 2;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .cred-column {
-            background: var(--cream);
-            padding: 2.5rem 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
-            border-top: 4px solid var(--bronze);
-            text-align: right;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cred-column:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-5px);
-        }
-
-        .cred-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: rgba(200, 121, 65, 0.1);
-            color: var(--bronze);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cred-column h3 {
-            color: var(--espresso);
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .cred-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            flex-grow: 1;
-        }
-
-        .cred-list li {
-            position: relative;
-            padding-right: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-bottom: 1rem;
-        }
-
-        .cred-list li:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .cred-list li::before {
-            content: "\f00c"; /* FontAwesome check */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            right: 0;
-            top: 2px;
-            color: var(--bronze);
-        }
-
-        .cred-list li strong {
-            color: var(--espresso);
-            display: inline-block;
-        }
-
-        .logo-placeholder {
-            margin-top: 2rem;
-            text-align: center;
-            opacity: 0.6;
-            padding-top: 1rem;
-            border-top: 1px dashed rgba(0,0,0,0.1);
-        }
+        /* הכשרה וניסיון */
+        .credentials { background: #fff; position: relative; z-index: 2; padding-top: 2rem; padding-bottom: 2rem; }
+        .credentials-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+        .cred-column { background: var(--cream); padding: 2.5rem 2rem; border-radius: var(--radius); box-shadow: var(--shadow-sm); border-top: 4px solid var(--bronze); text-align: right; transition: var(--transition); display: flex; flex-direction: column; }
+        .cred-column:hover { box-shadow: var(--shadow-md); transform: translateY(-5px); }
+        .cred-icon-wrapper { width: 60px; height: 60px; background: rgba(200, 121, 65, 0.1); color: var(--bronze); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .cred-column h3 { color: var(--espresso); margin-bottom: 1.5rem; font-size: 1.5rem; }
+        .cred-list { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .cred-list li { position: relative; padding-right: 1.8rem; margin-bottom: 1rem; color: var(--text-main); border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem; }
+        .cred-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .cred-list li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; right: 0; top: 2px; color: var(--bronze); }
+        .cred-list li strong { color: var(--espresso); display: inline-block; }
+        .logo-placeholder { margin-top: 2rem; text-align: center; opacity: 0.6; padding-top: 1rem; border-top: 1px dashed rgba(0,0,0,0.1); }
 
         /* קרוסלת הלוגואים */
-        .logo-slider-section {
-            background: #fff;
-            padding: 1rem 0 4rem;
-        }
-
-        .logo-slider {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            direction: ltr; /* תמיד משמאל לימין לאנימציה חלקה */
-        }
-        
-        .logo-slider::before,
-        .logo-slider::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 100px;
-            height: 100%;
-            z-index: 2;
-        }
-        .logo-slider::before {
-            left: 0;
-            background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%);
-        }
-        .logo-slider::after {
-            right: 0;
-            background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%);
-        }
-
-        .logo-slide-track {
-            display: flex;
-            width: max-content;
-            animation: scrollLogos 30s linear infinite;
-        }
-
-        .logo-slide-track:hover {
-            animation-play-state: paused; /* עוצר כשהעכבר מעל */
-        }
-
-        @keyframes scrollLogos {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* מזיז את הקרוסלה */
-        }
-
-        .slide {
-            width: 220px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 1rem;
-        }
-
-        /* עיצוב זמני ללוגואים עד שיעלו תמונות */
-        .mock-logo {
-            width: 100%;
-            height: 100%;
-            background: var(--sand);
-            border: 1px dashed var(--bronze);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-align: center;
-            padding: 0.5rem;
-        }
-
-        .slide img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: grayscale(100%); /* נותן ללוגואים מראה יוקרתי ואחיד */
-            opacity: 0.7;
-            transition: var(--transition);
-        }
-        .slide img:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
+        .logo-slider-section { background: #fff; padding: 1rem 0 4rem; }
+        .logo-slider { overflow: hidden; position: relative; width: 100%; direction: ltr; }
+        .logo-slider::before, .logo-slider::after { content: ""; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2; }
+        .logo-slider::before { left: 0; background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%); }
+        .logo-slider::after { right: 0; background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%); }
+        .logo-slide-track { display: flex; width: max-content; animation: scrollLogos 30s linear infinite; }
+        .logo-slide-track:hover { animation-play-state: paused; }
+        @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .slide { width: 220px; height: 100px; display: flex; align-items: center; justify-content: center; padding: 0 1rem; }
+        .mock-logo { width: 100%; height: 100%; background: var(--sand); border: 1px dashed var(--bronze); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 600; font-size: 0.95rem; text-align: center; padding: 0.5rem; }
+        .slide img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(100%); opacity: 0.7; transition: var(--transition); }
+        .slide img:hover { filter: grayscale(0%); opacity: 1; }
                             
         /* אזור ההרצאות */
-        .lectures { 
-            background: var(--sand); 
-            text-align: center; 
-            z-index: 1;
-            padding: 4rem 0;
-            position: relative;
-        }
-        
-        /* Mobile Show More Wrapper */
-        .lectures-mobile-container {
-            position: relative;
-        }
-        .lectures-wrapper {
-            overflow: hidden;
-            transition: max-height 0.8s ease;
-        }
-        .lectures-fade {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to bottom, rgba(243, 236, 230, 0), var(--sand) 90%);
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 2;
-        }
-
+        .lectures { background: var(--sand); text-align: center; z-index: 1; padding: 4rem 0; position: relative; }
+        .lectures-mobile-container { position: relative; }
+        .lectures-wrapper { overflow: hidden; transition: max-height 0.8s ease; }
+        .lectures-fade { position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to bottom, rgba(243, 236, 230, 0), var(--sand) 90%); pointer-events: none; transition: opacity 0.3s ease; z-index: 2; }
         .cards-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
         .card { background: var(--cream); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow-md); text-align: right; border-top: 4px solid var(--bronze); }
         .card .target-audience { display: inline-block; background: rgba(200, 121, 65, 0.1); color: var(--bronze); font-weight: 600; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 1rem; }
         .lectures-subtitle { color: var(--text-light); font-size: 1.1rem; margin-top: -1rem; margin-bottom: 2rem; }
 
         /* קהל יעד */
-        .audiences { 
-            position: relative;
-            z-index: 10;
-            background: var(--espresso); 
-            color: var(--cream); 
-            text-align: center; 
-            padding: 5rem 0;
-            box-shadow: 0 -15px 30px rgba(0,0,0,0.3); 
-        }
-        
+        .audiences { position: relative; z-index: 10; background: var(--espresso); color: var(--cream); text-align: center; padding: 5rem 0; box-shadow: 0 -15px 30px rgba(0,0,0,0.3); }
         .audiences h2 { color: #fff; }
         .audiences p { color: #D0C5BF; margin-bottom: 3rem; font-size: 1.1rem; }
         .audiences-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; text-align: right; }
@@ -332,122 +148,202 @@
         .audience-box h3 { color: var(--bronze); font-size: 1.2rem; margin-bottom: 0.5rem; }
         .audience-box p { color: #E0D6D1; margin: 0; font-size: 0.95rem; }
 
-        /* אזור תמונה - אינפוגרפיקה */
-        .infographic-section { padding: 0;
-                              background: var(--espresso);
-                              position: relative;
-                              z-index: 2; 
-                             }
-        .infographic-section img { width: 100%;
-                                  height: auto; 
-                                  display: block; 
-                                  border-radius: 0;
-                                 }
+        /* אינפוגרפיקה */
+        .infographic-section { padding: 0; background: var(--espresso); position: relative; z-index: 2; }
+        .infographic-section img { width: 100%; height: auto; display: block; border-radius: 0; }
 
-        /* Contact Area - Minimalist */
-        #contact { background: #e8ded7;
-                  position: relative;
-                  z-index: 10; 
-                  padding: 4rem 0 2rem; 
-                  text-align: center;
-                  margin-bottom: 0 !important;
-                 }
-
-        .contact-grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 1.5rem; 
-            max-width: 500px; 
-            margin: 2rem auto; 
+        /* --- אזור כשהסיפור פוגש את הקהל (המלצות) --- */
+        .testimonials-section {
+            background: #fff;
+            padding: 5rem 0;
+            position: relative;
+            z-index: 5;
+            overflow: hidden;
+        }
+        
+        .testimonials-slider {
+            direction: ltr; /* מחייב LTR כדי שהגלילה תעבוד מושלם במעגליות */
+            position: relative;
+            width: 100%;
         }
 
-        .contact-method {
+        /* גרדיאנט לבן בצדדים ליצירת השתלבות חלקה */
+        .testimonials-slider::before,
+        .testimonials-slider::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .testimonials-slider::before { left: 0; background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%); }
+        .testimonials-slider::after { right: 0; background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%); }
+
+        .testimonials-track {
+            display: flex;
+            width: max-content;
+            animation: scrollReviews 45s linear infinite;
+        }
+        .testimonials-track:hover {
+            animation-play-state: paused;
+        }
+
+        .testimonials-set {
+            display: flex;
+            gap: 1.5rem;
+            padding-right: 1.5rem; /* יוצר את הרווח המדויק להמשך אינסופי ללא קפיצה */
+        }
+
+        @keyframes scrollReviews {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); } /* מזיז 50% שזה בדיוק סט אחד החוצה */
+        }
+
+        .testimonial-card {
+            direction: rtl; /* מחזירים לימין-שמאל עבור העברית */
+            width: 320px;
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border-top: 4px solid var(--bronze);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        .contact-icon { 
-            font-size: 2.2rem; 
-            color: var(--bronze); 
-            background: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-sm);
+            text-align: right;
             transition: var(--transition);
         }
-        .contact-method:hover .contact-icon { transform: translateY(-5px); box-shadow: var(--shadow-md); color: var(--bronze); }
-        
-        .contact-link {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-main);
-            direction: ltr; 
+
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
         }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: rgba(200, 121, 65, 0.15);
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-main);
+            font-size: 1rem;
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        /* מחביא את התוכן המלא לשימוש ב-JS */
+        .testimonial-full-text { display: none; }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--bronze);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-align: right;
+            padding: 0;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: var(--transition);
+            width: max-content;
+        }
+        .read-more-btn:hover {
+            color: var(--bronze-hover);
+            text-decoration: underline;
+        }
+
+        .testimonial-author {
+            margin-top: auto; /* דוחף את השם לתחתית הכרטיס */
+            border-top: 1px solid rgba(0,0,0,0.06);
+            padding-top: 1rem;
+            font-size: 1.05rem;
+            color: var(--espresso);
+            font-weight: 700;
+        }
+        .testimonial-author span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        /* Modal (חלון קופץ) לביקורות */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(48, 38, 33, 0.85);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2.5rem 2rem 2rem;
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-top: 4px solid var(--bronze);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 20px; /* צד שמאל בגלל שהאתר מימין לשמאל */
+            color: var(--text-light);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: var(--transition);
+        }
+        .close-modal:hover { color: var(--bronze); transform: scale(1.1); }
+        #modalText { font-size: 1.05rem; line-height: 1.7; color: var(--text-main); margin-bottom: 2rem; }
+        #modalAuthor { font-size: 1.2rem; color: var(--espresso); border-top: 1px solid #eee; padding-top: 1rem; }
+        #modalAuthor span { display: block; font-size: 0.9rem; font-weight: 400; color: var(--text-light); margin-top: 4px; }
+
+        /* Contact Area */
+        #contact { background: #e8ded7; position: relative; z-index: 10; padding: 4rem 0 2rem; text-align: center; margin-bottom: 0 !important; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 500px; margin: 2rem auto; }
+        .contact-method { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .contact-icon { font-size: 2.2rem; color: var(--bronze); background: white; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); transition: var(--transition); }
+        .contact-method:hover .contact-icon { transform: translateY(-5px); box-shadow: var(--shadow-md); color: var(--bronze); }
+        .contact-link { font-weight: 600; font-size: 1rem; color: var(--text-main); direction: ltr; }
         .contact-link:hover { color: var(--bronze); }
         .bg-mail {visibility: hidden;}
         .bg-phone {visibility: hidden;}
 
         /* WhatsApp Floating Button */
-        .floating-wa {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .floating-wa.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .floating-wa:hover {
-            background-color: #1EBE5D;
-            transform: scale(1.05) translateY(-5px);
-        }
+        .floating-wa { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .floating-wa.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .floating-wa:hover { background-color: #1EBE5D; transform: scale(1.05) translateY(-5px); }
 
-        /* Final Footer */
-        .main-footer {
-            background: var(--bronze);
-            color: rgba(255,255,255,0.8);
-            padding: 12px 0; 
-            text-align: center;
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 10;
-            margin-top: auto; 
-            line-height: 1.2;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-
-        .main-footer a { 
-            color: #fff; 
-            font-weight: 600; 
-            border-bottom: 1px solid var(--bronze); 
-        }
-
-        .main-footer p {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
+        /* Footer */
+        .main-footer { background: var(--bronze); color: rgba(255,255,255,0.8); padding: 12px 0; text-align: center; font-size: 0.85rem; position: relative; z-index: 10; margin-top: auto; line-height: 1.2; overflow: hidden; flex-shrink: 0; }
+        .main-footer a { color: #fff; font-weight: 600; border-bottom: 1px solid var(--bronze); }
+        .main-footer p { margin: 0 !important; padding: 0 !important; }
 
         /* Reveal Animation */
         .reveal-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -457,93 +353,45 @@
 
         /* --- Media Queries --- */
         @media (max-width: 991px) {
-            /* עיצוב 'הצג הכל' במובייל לאזור ההרצאות */
-            .lectures-wrapper {
-                max-height: 1050px; 
-            }
-            .lectures-wrapper.expanded {
-                max-height: 5000px;
-            }
-            .lectures-wrapper.expanded + .lectures-fade {
-                opacity: 0;
-                pointer-events: none;
-            }
-            .show-more-btn-container {
-                text-align: center;
-                margin-top: 2rem;
-                position: relative;
-                z-index: 3;
-            }
-            .show-more-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                padding: 12px 30px;
-                background: transparent;
-                color: var(--bronze);
-                border: 2px solid var(--bronze);
-                border-radius: 50px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: var(--transition);
-                font-size: 1rem;
-            }
-            .show-more-btn:hover {
-                background: var(--bronze);
-                color: #fff;
-            }
+            .lectures-wrapper { max-height: 1050px; }
+            .lectures-wrapper.expanded { max-height: 5000px; }
+            .lectures-wrapper.expanded + .lectures-fade { opacity: 0; pointer-events: none; }
+            .show-more-btn-container { text-align: center; margin-top: 2rem; position: relative; z-index: 3; }
+            .show-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 30px; background: transparent; color: var(--bronze); border: 2px solid var(--bronze); border-radius: 50px; font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 1rem; }
+            .show-more-btn:hover { background: var(--bronze); color: #fff; }
         }
 
         @media (max-width: 768px) {
-            .floating-wa {
-                bottom: 20vh;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 1.8rem;
-            }
+            .floating-wa { bottom: 20vh; right: 20px; width: 55px; height: 55px; font-size: 1.8rem; }
             .contact-link { font-size: 0.95rem; }
             .credentials-grid { gap: 1.5rem; }
-            
-            /* מרכוז הלוגו והכותרות באזור ההכשרה והניסיון במובייל */
             .cred-icon-wrapper { margin-left: auto; margin-right: auto; }
             .cred-column h3 { text-align: center; }
             .logo-placeholder { text-align: center; }
+            .testimonials-slider::before, .testimonials-slider::after { width: 40px; }
         }
 
         @media (min-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .contact-grid { grid-template-columns: 1fr 1fr; }
+            .testimonial-card { width: 420px; } /* כרטיסיות רחבות יותר בדסקטופ */
         }
 
         @media (min-width: 992px) {
             .menu-toggle { display: none; }
             .nav-links { display: flex; gap: 2rem; font-weight: 500; }
             .header-btn { display: inline-flex; width: auto; padding: 10px 24px; font-size: 1rem; }
-            
             .hero { text-align: right; padding: 8rem 0; }
             .hero .container { display: flex; flex-direction: column; align-items: flex-start; max-width: 800px; margin: 0 auto; }
             .hero .btn { width: auto; }
-            
             .about-wrapper { flex-direction: row; align-items: center; gap: 4rem; }
             .about-image { height: 450px; flex: 1; }
             .about-text { flex: 1; }
-            
             .credentials-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
-
-            .lectures { 
-                position: relative; 
-                top: 75px; 
-                padding: 4rem 0 6rem; 
-            }
+            .lectures { position: relative; top: 75px; padding: 4rem 0 6rem; }
             .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-            
-            /* ביטול חיתוך ההרצאות במסכים גדולים */
             .lectures-wrapper { max-height: none !important; }
             .lectures-fade { display: none !important; }
             .show-more-btn-container { display: none !important; }
-            
             .audiences { min-height: auto; padding: 6rem 0; box-shadow: 0 -25px 50px rgba(0,0,0,0.5); }
             .audiences-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
         }
@@ -582,7 +430,7 @@
         <section id="about" class="about">
             <div class="container about-wrapper">
                 <div class="about-image-wrapper reveal-up">
-                    <img src="ee37e2cd-23a2-47aa-a79a-084d7c1be925.jpeg" alt="נדב בוגט מרצה" class="about-image">
+                    <img src="IMG_7916.jpeg" alt="נדב בוגט מרצה" class="about-image">
                 </div>
                 <div class="about-text reveal-up delay-1">
                     <h2>הסיפור שלי: תעודת זהות ללא פילטרים</h2> 
@@ -600,28 +448,20 @@
                     <h2>הכשרה מקצועית וניסיון בשטח</h2>
                     <p style="color: var(--text-light); margin-bottom: 3rem;">השילוב המדויק בין ניסיון חיים אישי לבין כלים מקצועיים ואקדמיים</p>
                 </div>
-                
                 <div class="credentials-grid">
                     <div class="cred-column reveal-up delay-1">
-                        <div class="cred-icon-wrapper">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
+                        <div class="cred-icon-wrapper"><i class="fas fa-graduation-cap"></i></div>
                         <h3>הכשרה ולימודים</h3>
                         <ul class="cred-list">
                             <li><strong>בוגר מרכז י.נ.ר</strong> - ללימודי גיל ההתבגרות, נוער ונוער חרדי בסיכון</li>
                         </ul>
-                        
                         <div class="logo-placeholder">
                             <i class="fas fa-award" style="font-size: 2rem; color: var(--bronze); margin-bottom: 0.5rem;"></i>
-
-
-                            </div>
-                    </div>
-
-                    <div class="cred-column reveal-up delay-2">
-                        <div class="cred-icon-wrapper">
-                            <i class="fas fa-briefcase"></i>
+                            <p style="font-size: 0.8rem; margin: 0;">ניתן להחליף את האייקון בלוגו המוסד</p>
                         </div>
+                    </div>
+                    <div class="cred-column reveal-up delay-2">
+                        <div class="cred-icon-wrapper"><i class="fas fa-briefcase"></i></div>
                         <h3>ניסיון מקצועי</h3>
                         <ul class="cred-list">
                             <li><strong>מדריך הוסטל</strong> - בית הצייר</li>
@@ -639,21 +479,19 @@
         <section class="logo-slider-section reveal-up">
             <div class="logo-slider">
                 <div class="logo-slide-track">
-                    <div class="logo-slide-track">
-    <div class="slide"><img src="בית הצייר.jpeg" alt="לוגו בית הצייר"></div>
-    <div class="slide"><img src="בת ים.jpeg" alt="מרכז נוער בת ים"></div>
-    <div class="slide"><img src="ירושלים.jpeg" alt="שלטר ירושלים"></div>
-    <div class="slide"><img src="נירים.jpeg" alt="פנימיית נירים"></div>
-    <div class="slide"><img src="גילה.jpeg" alt="מקיף גילה"></div>
-
-    
-    <div class="slide"><img src="בית הצייר.jpeg" alt="לוגו בית הצייר"></div>
-    <div class="slide"><img src="בת ים.jpeg" alt="מרכז נוער בת ים"></div>
-    <div class="slide"><img src="ירושלים.jpeg" alt="שלטר ירושלים"></div>
-    <div class="slide"><img src="נירים.jpeg" alt="פנימיית נירים"></div>
-    <div class="slide"><img src="גילה.jpeg" alt="מקיף גילה"></div>
- 
-</div>
+                    <div class="slide"><div class="mock-logo">הוסטל בית הצייר</div></div>
+                    <div class="slide"><div class="mock-logo">שלטר ירושלים</div></div>
+                    <div class="slide"><div class="mock-logo">מרכז נוער בת ים</div></div>
+                    <div class="slide"><div class="mock-logo">פנימיית נירים</div></div>
+                    <div class="slide"><div class="mock-logo">מקיף גילה</div></div>
+                    <div class="slide"><div class="mock-logo">בי"ס רב תרבותי ת"א</div></div>
+                    
+                    <div class="slide"><div class="mock-logo">הוסטל בית הצייר</div></div>
+                    <div class="slide"><div class="mock-logo">שלטר ירושלים</div></div>
+                    <div class="slide"><div class="mock-logo">מרכז נוער בת ים</div></div>
+                    <div class="slide"><div class="mock-logo">פנימיית נירים</div></div>
+                    <div class="slide"><div class="mock-logo">מקיף גילה</div></div>
+                    <div class="slide"><div class="mock-logo">בי"ס רב תרבותי ת"א</div></div>
                 </div>
             </div>
         </section>
@@ -662,67 +500,25 @@
             <div class="container">
                 <h2 class="reveal-up">ניסיון חיים פוגש פרקטיקה: נושאי הרצאות והדרכות</h2>
                 <p class="lectures-subtitle reveal-up">מגוון הרצאות, סדנאות והשתלמויות המותאמות לבני נוער, צוותי חינוך והורים.</p>
-                
                 <div class="lectures-mobile-container">
                     <div class="lectures-wrapper" id="lecturesWrapper">
                         <div class="cards-grid">
-                            <div class="card reveal-up delay-1">
-                                <span class="target-audience">זהות ושייכות</span>
-                                <h3>לעגן את הלב</h3>
-                                <p>התמודדות עם מורכבות עולם האימוץ והאומנה, ותקווה למי שמרגיש תחושת חריגות ובדידות עמוקה.</p>
-                            </div>
-                            <div class="card reveal-up delay-2">
-                                <span class="target-audience">צמיחה ממשבר</span>
-                                <h3>לבחור בחיים</h3>
-                                <p>בניית חוסן מנטלי, בחירה אקטיבית בחיים, והכלים לשיקום האמון העצמי שאבד.</p>
-                            </div>
-                            <div class="card reveal-up delay-1">
-                                <span class="target-audience">קשיים רגשיים</span>
-                                <h3>לגשר על חוסר האמון</h3>
-                                <p>התמודדות עם חוסר אמון בממסד, קשיי תקשורת עם סמכות, ואלימות ככלי ביטוי.</p>
-                            </div>
-
-                            <div class="card reveal-up delay-2">
-                                <span class="target-audience">זיהוי מוקדם</span>
-                                <h3>נורות אזהרה בדרך</h3>
-                                <p>איתור סימנים מוקדמים של מצוקה, נשירה ממסגרות, שינויי התנהגות פתאומיים, נסיגה חברתית ודיכאון אצל בני נוער.</p>
-                            </div>
-                            <div class="card reveal-up delay-1">
-                                <span class="target-audience">התנהגות מסכנת</span>
-                                <h3>לעצור את כדור השלג</h3>
-                                <p>הבנת גורמי ההידרדרות לעבריינות, חיי רחוב, ושימוש בחומרים (סמים ואלכוהול). התמודדות מול התנהגות מינית סיכונית.</p>
-                            </div>
-                             <div class="card reveal-up delay-2">
-                                <span class="target-audience">מניעה והתערבות</span>
-                                <h3>כלים של הצלה</h3>
-                                <p>אסטרטגיות התערבות וגישות טיפוליות. קביעת גבולות ויצירת סביבה בטוחה ומובנית. התערבות מצילת-חיים במצבי אובדנות.</p>
-                            </div>
-                            <div class="card reveal-up delay-1">
-                                <span class="target-audience">המרחב החברתי</span>
-                                <h3>מעגלים של פגיעות</h3>
-                                <p>התמודדות עם קושי חברתי, בידוד וחוסר שייכות. כלים מעשיים למניעת חרמות, אלימות ודחייה חברתית.</p>
-                            </div>
-                            <div class="card reveal-up delay-2">
-                                <span class="target-audience">הסביבה הדיגיטלית</span>
-                                <h3>סכנות במרחב הווירטואלי</h3>
-                                <p>הבנת עולמם של בני הנוער ברשת: זיהוי ומניעה של בריונות דיגיטלית, ופגיעות המתרחשות הרחק מעיני המבוגרים.</p>
-                            </div>
-                            <div class="card reveal-up delay-1">
-                                <span class="target-audience">לצוותי חינוך וטיפול</span>
-                                <h3>עבודה מערכתית מקדמת</h3>
-                                <p>פיתוח מקצועי והתעדכנות בגישות חדשות לטיפול בנוער. חשיבות שיתוף הפעולה הרב-מערכתי ויצירת רשת תמיכה הדוקה.</p>
-                            </div>
+                            <div class="card reveal-up delay-1"><span class="target-audience">זהות ושייכות</span><h3>לעגן את הלב</h3><p>התמודדות עם מורכבות עולם האימוץ והאומנה, ותקווה למי שמרגיש תחושת חריגות ובדידות עמוקה.</p></div>
+                            <div class="card reveal-up delay-2"><span class="target-audience">צמיחה ממשבר</span><h3>לבחור בחיים</h3><p>בניית חוסן מנטלי, בחירה אקטיבית בחיים, והכלים לשיקום האמון העצמי שאבד.</p></div>
+                            <div class="card reveal-up delay-1"><span class="target-audience">קשיים רגשיים</span><h3>לגשר על חוסר האמון</h3><p>התמודדות עם חוסר אמון בממסד, קשיי תקשורת עם סמכות, ואלימות ככלי ביטוי.</p></div>
+                            <div class="card reveal-up delay-2"><span class="target-audience">זיהוי מוקדם</span><h3>נורות אזהרה בדרך</h3><p>איתור סימנים מוקדמים של מצוקה, נשירה ממסגרות, שינויי התנהגות פתאומיים, נסיגה חברתית ודיכאון אצל בני נוער.</p></div>
+                            <div class="card reveal-up delay-1"><span class="target-audience">התנהגות מסכנת</span><h3>לעצור את כדור השלג</h3><p>הבנת גורמי ההידרדרות לעבריינות, חיי רחוב, ושימוש בחומרים (סמים ואלכוהול). התמודדות מול התנהגות מינית סיכונית.</p></div>
+                             <div class="card reveal-up delay-2"><span class="target-audience">מניעה והתערבות</span><h3>כלים של הצלה</h3><p>אסטרטגיות התערבות וגישות טיפוליות. קביעת גבולות ויצירת סביבה בטוחה ומובנית. התערבות מצילת-חיים במצבי אובדנות.</p></div>
+                            <div class="card reveal-up delay-1"><span class="target-audience">המרחב החברתי</span><h3>מעגלים של פגיעות</h3><p>התמודדות עם קושי חברתי, בידוד וחוסר שייכות. כלים מעשיים למניעת חרמות, אלימות ודחייה חברתית.</p></div>
+                            <div class="card reveal-up delay-2"><span class="target-audience">הסביבה הדיגיטלית</span><h3>סכנות במרחב הווירטואלי</h3><p>הבנת עולמם של בני הנוער ברשת: זיהוי ומניעה של בריונות דיגיטלית, ופגיעות המתרחשות הרחק מעיני המבוגרים.</p></div>
+                            <div class="card reveal-up delay-1"><span class="target-audience">לצוותי חינוך וטיפול</span><h3>עבודה מערכתית מקדמת</h3><p>פיתוח מקצועי והתעדכנות בגישות חדשות לטיפול בנוער. חשיבות שיתוף הפעולה הרב-מערכתי ויצירת רשת תמיכה הדוקה.</p></div>
                         </div>
                     </div>
                     <div class="lectures-fade" id="lecturesFade"></div>
                 </div>
-                
                 <div class="show-more-btn-container" id="showMoreContainer">
-                    <button class="show-more-btn" id="showMoreBtn">
-                        הצג הכל <i class="fas fa-chevron-down"></i>
-                    </button>
+                    <button class="show-more-btn" id="showMoreBtn">הצג הכל <i class="fas fa-chevron-down"></i></button>
                 </div>
-
             </div>
         </section>
 
@@ -730,30 +526,129 @@
             <div class="container audiences-content reveal-up">
                 <h2>למי ההרצאה מתאימה?</h2>
                 <p>התוכן מותאם אישית לכל קבוצה, מתוך הבנה של הצרכים הייחודיים בשטח:</p>
-                
                 <div class="audiences-grid">
-                    <div class="audience-box reveal-up delay-1">
-                        <h3>בני נוער וצעירים</h3>
-                        <p>בבתי ספר, פנימיות, מכינות קדם-צבאיות, מרכזי נוער קהילתיים ותנועות נוער.</p>
-                    </div>
-                    <div class="audience-box reveal-up delay-1">
-                        <h3>צוותי חינוך וטיפול</h3>
-                        <p>הרצאות והשתלמויות לאנשי חינוך, מדריכים חינוכיים, עובדים סוציאליים וצוותי פנימיות.</p>
-                    </div>
-                    <div class="audience-box reveal-up delay-2">
-                        <h3>ארגונים ומגזר ציבורי</h3>
-                        <p>עמותות חברתיות, גופים ומוסדות העוסקים בשיקום ובקידום נוער בסיכון.</p>
-                    </div>
-                    <div class="audience-box reveal-up delay-2">
-                        <h3>הורים</h3>
-                        <p>מפגשים המעניקים הצצה כנה לעולמם של בני נוער בסיכון וכלים ליצירת שפה משותפת ואמון.</p>
-                    </div>
+                    <div class="audience-box reveal-up delay-1"><h3>בני נוער וצעירים</h3><p>בבתי ספר, פנימיות, מכינות קדם-צבאיות, מרכזי נוער קהילתיים ותנועות נוער.</p></div>
+                    <div class="audience-box reveal-up delay-1"><h3>צוותי חינוך וטיפול</h3><p>הרצאות והשתלמויות לאנשי חינוך, מדריכים חינוכיים, עובדים סוציאליים וצוותי פנימיות.</p></div>
+                    <div class="audience-box reveal-up delay-2"><h3>ארגונים ומגזר ציבורי</h3><p>עמותות חברתיות, גופים ומוסדות העוסקים בשיקום ובקידום נוער בסיכון.</p></div>
+                    <div class="audience-box reveal-up delay-2"><h3>הורים</h3><p>מפגשים המעניקים הצצה כנה לעולמם של בני נוער בסיכון וכלים ליצירת שפה משותפת ואמון.</p></div>
                 </div>
             </div>
         </section>
-
-         <section class="infographic-section reveal-up">
+        
+        <section class="infographic-section reveal-up">
             <img src="IMG_792222.png" alt="סיפור של שינוי - מנער בסכנה למחנך מנצח">
+        </section>
+
+        <section class="testimonials-section reveal-up">
+            <div class="container text-center">
+                <h2>כשהסיפור פוגש את הקהל</h2>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonials-track">
+                    
+                    <div class="testimonials-set">
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="testimonial-text">
+                                נדב היקר,<br>
+                                אמנם לא זכיתי להיות מדריך או מורה בזמן שהיית תלמיד בבית הצייר, אך זכיתי לפגוש ולהכיר אותך במספר הזדמנויות. עד לאחרונה לא הכרתי את הסיפור האישי שלך, ולשמחתי נכחתי בהרצאה שלך בבית הצייר בפני הנערים ושמעתי אותו במלואו.<br><br>
+                                הסיפור שלך היה מרגש מאוד. התרגשתי יחד איתך, ובכישרון רב הצלחת לרתק ולהפנט את התלמידים. אתה מקור להשראה שמאיר הרבה תקווה עבור הנערים שלנו. מי כמוך מסוגל להבין אותם באמת ולגעת בליבם, לב שלעיתים הפך למוגן בעקבות נסיבות החיים, וליצוק לתוכו את הרגש שהם כל כך זקוקים לו.<br><br>
+                                יותר מכל, זיהיתי אמפתיה עמוקה של הנערים כלפיך, כאילו הם מלווים אותך במסע הסיפור שלך ובעצם גם מטפלים בעצמם דרך ההקשבה. זו, חבר יקר, אומנות בפני עצמה.<br><br>
+                                כל הכבוד על האומץ לחשוף ולהיחשף כדי להרבות טוב בעולם. ממליץ בחום להגיע, לשמוע ולהקשיב. ❤️
+                            </div>
+                            <div class="testimonial-full-text">
+                                נדב היקר,<br>
+                                אמנם לא זכיתי להיות מדריך או מורה בזמן שהיית תלמיד בבית הצייר, אך זכיתי לפגוש ולהכיר אותך במספר הזדמנויות. עד לאחרונה לא הכרתי את הסיפור האישי שלך, ולשמחתי נכחתי בהרצאה שלך בבית הצייר בפני הנערים ושמעתי אותו במלואו.<br><br>
+                                הסיפור שלך היה מרגש מאוד. התרגשתי יחד איתך, ובכישרון רב הצלחת לרתק ולהפנט את התלמידים. אתה מקור להשראה שמאיר הרבה תקווה עבור הנערים שלנו. מי כמוך מסוגל להבין אותם באמת ולגעת בליבם, לב שלעיתים הפך למוגן בעקבות נסיבות החיים, וליצוק לתוכו את הרגש שהם כל כך זקוקים לו.<br><br>
+                                יותר מכל, זיהיתי אמפתיה עמוקה של הנערים כלפיך, כאילו הם מלווים אותך במסע הסיפור שלך ובעצם גם מטפלים בעצמם דרך ההקשבה. זו, חבר יקר, אומנות בפני עצמה.<br><br>
+                                כל הכבוד על האומץ לחשוף ולהיחשף כדי להרבות טוב בעולם. ממליץ בחום להגיע, לשמוע ולהקשיב. ❤️
+                            </div>
+                            <button class="read-more-btn">הצג עוד</button>
+                            <div class="testimonial-author">עודד כרמני</div>
+                        </div>
+                        
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="testimonial-text">
+                                רציתי לומר לך כמה מילים על ההרצאה.<br>
+                                היית מיוחד, אותנטי וסוחף. הצלחת לרתק תלמידים שגם כך לא קל להם לשבת לאורך זמן. העברת את סיפור חייך בצורה קוהרנטית ומרתקת.<br><br>
+                                ראיתי כיצד לאחר ההרצאה נשארו תלמידים לשוחח איתך, וזה אמר הרבה. אני יכול לומר לך שגם אותי חיזקת מאוד. שאבתי כוח מהדקות של השיחה איתך. גם הפידבקים מהנערים היו דומים ונשמע שהם רצו לשמוע עוד.<br><br>
+                                תבוא יותר ❤️
+                            </div>
+                            <div class="testimonial-full-text">
+                                רציתי לומר לך כמה מילים על ההרצאה.<br>
+                                היית מיוחד, אותנטי וסוחף. הצלחת לרתק תלמידים שגם כך לא קל להם לשבת לאורך זמן. העברת את סיפור חייך בצורה קוהרנטית ומרתקת.<br><br>
+                                ראיתי כיצד לאחר ההרצאה נשארו תלמידים לשוחח איתך, וזה אמר הרבה. אני יכול לומר לך שגם אותי חיזקת מאוד. שאבתי כוח מהדקות של השיחה איתך. גם הפידבקים מהנערים היו דומים ונשמע שהם רצו לשמוע עוד.<br><br>
+                                תבוא יותר ❤️
+                            </div>
+                            <button class="read-more-btn">הצג עוד</button>
+                            <div class="testimonial-author">ניר בן ישי <span>רכז מנ”ש נווה עופר, עיריית תל אביב יפו</span></div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="testimonial-text">
+                                וואי נדב, היה ממש טוב.<br>
+                                הרגשתי שאתה מדבר עליי כאילו אני מדבר על עצמי. היה לי קל להקשיב לך, אפילו יותר מאשר לצוות, כי אתה ממש כמעט כמוני.<br><br>
+                                איזה תותח.
+                            </div>
+                            <div class="testimonial-full-text">
+                                וואי נדב, היה ממש טוב.<br>
+                                הרגשתי שאתה מדבר עליי כאילו אני מדבר על עצמי. היה לי קל להקשיב לך, אפילו יותר מאשר לצוות, כי אתה ממש כמעט כמוני.<br><br>
+                                איזה תותח.
+                            </div>
+                            <button class="read-more-btn">הצג עוד</button>
+                            <div class="testimonial-author">אור, תלמיד</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="testimonial-text">
+                                זכיתי לשמוע יחד עם תלמידיי את ההרצאה העוצמתית של נדב. זה היה שיעור מרגש על היכולת האנושית לצמוח מתוך משברים ולבחור בחיים פעם אחר פעם.<br><br>
+                                נדב שיתף בפתיחות ובכנות בחוויות הלא פשוטות שעבר, והדבר המרשים ביותר היה הדרך שבה הצליח לזקק תובנות מעשיות שכל אחד יכול לקחת אל חייו האישיים.<br><br>
+                                המסרים המרכזיים בהרצאה, שנושקים למה שאנו מנסים להעביר לתלמידים בבית הספר כל הזמן, הם שלבחירות יש משמעות, שידע הוא כוח וכמה חשוב להיעזר בדמויות שמאמינות בך ורוצות בהצלחתך.<br><br>
+                                ממליצה בחום.
+                            </div>
+                            <div class="testimonial-full-text">
+                                זכיתי לשמוע יחד עם תלמידיי את ההרצאה העוצמתית של נדב. זה היה שיעור מרגש על היכולת האנושית לצמוח מתוך משברים ולבחור בחיים פעם אחר פעם.<br><br>
+                                נדב שיתף בפתיחות ובכנות בחוויות הלא פשוטות שעבר, והדבר המרשים ביותר היה הדרך שבה הצליח לזקק תובנות מעשיות שכל אחד יכול לקחת אל חייו האישיים.<br><br>
+                                המסרים המרכזיים בהרצאה, שנושקים למה שאנו מנסים להעביר לתלמידים בבית הספר כל הזמן, הם שלבחירות יש משמעות, שידע הוא כוח וכמה חשוב להיעזר בדמויות שמאמינות בך ורוצות בהצלחתך.<br><br>
+                                ממליצה בחום.
+                            </div>
+                            <button class="read-more-btn">הצג עוד</button>
+                            <div class="testimonial-author">מיכלי שרוני <span>בית הצייר</span></div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="testimonial-text">
+                                נדב הגיע להרצאות אצלנו בבית הספר לנוער בסיכון. היה מרגש לראות כיצד בתוך דקות ספורות הצליח להיכנס לליבם של התלמידים. הסיפור שלו נגע בכל אחד ואחד מהם.<br><br>
+                                לתלמידים שלנו יש קושי לשבת זמן ממושך, אך הם ישבו, הקשיבו ואף השתתפו לאורך כל ההרצאה. באופן אישי הרגשתי שמה שנדב מביא איתו, החוויה, האותנטיות והיכולת לגעת, הוא דבר שגם אם מאוד אנסה לא אצליח להביא באותה צורה.<br><br>
+                                נדב הוא בחור כריזמטי, אופטימי ובעל חוש הומור, שהצליח להרים את עצמו בשתי ידיו. בסיום המפגש עמדו התלמידים בתור כדי ללחוץ את ידו ולחבק אותו.<br><br>
+                                אני ממליצה עליו בחום רב.
+                            </div>
+                            <div class="testimonial-full-text">
+                                נדב הגיע להרצאות אצלנו בבית הספר לנוער בסיכון. היה מרגש לראות כיצד בתוך דקות ספורות הצליח להיכנס לליבם של התלמידים. הסיפור שלו נגע בכל אחד ואחד מהם.<br><br>
+                                לתלמידים שלנו יש קושי לשבת זמן ממושך, אך הם ישבו, הקשיבו ואף השתתפו לאורך כל ההרצאה. באופן אישי הרגשתי שמה שנדב מביא איתו, החוויה, האותנטיות והיכולת לגעת, הוא דבר שגם אם מאוד אנסה לא אצליח להביא באותה צורה.<br><br>
+                                נדב הוא בחור כריזמטי, אופטימי ובעל חוש הומור, שהצליח להרים את עצמו בשתי ידיו. בסיום המפגש עמדו התלמידים בתור כדי ללחוץ את ידו ולחבק אותו.<br><br>
+                                אני ממליצה עליו בחום רב.
+                            </div>
+                            <button class="read-more-btn">הצג עוד</button>
+                            <div class="testimonial-author">קרן הבר <span>מחנכת בבית הספר</span></div>
+                        </div>
+                    </div>
+
+                    <div class="testimonials-set">
+                        <div class="testimonial-card"><i class="fas fa-quote-right quote-icon"></i><div class="testimonial-text">נדב היקר,<br>אמנם לא זכיתי להיות מדריך או מורה בזמן שהיית תלמיד בבית הצייר, אך זכיתי לפגוש ולהכיר אותך במספר הזדמנויות. עד לאחרונה לא הכרתי את הסיפור האישי שלך, ולשמחתי נכחתי בהרצאה שלך בבית הצייר בפני הנערים ושמעתי אותו במלואו.<br><br>הסיפור שלך היה מרגש מאוד. התרגשתי יחד איתך, ובכישרון רב הצלחת לרתק ולהפנט את התלמידים. אתה מקור להשראה שמאיר הרבה תקווה עבור הנערים שלנו. מי כמוך מסוגל להבין אותם באמת ולגעת בליבם, לב שלעיתים הפך למוגן בעקבות נסיבות החיים, וליצוק לתוכו את הרגש שהם כל כך זקוקים לו.<br><br>יותר מכל, זיהיתי אמפתיה עמוקה של הנערים כלפיך, כאילו הם מלווים אותך במסע הסיפור שלך ובעצם גם מטפלים בעצמם דרך ההקשבה. זו, חבר יקר, אומנות בפני עצמה.<br><br>כל הכבוד על האומץ לחשוף ולהיחשף כדי להרבות טוב בעולם. ממליץ בחום להגיע, לשמוע ולהקשיב. ❤️</div><div class="testimonial-full-text">נדב היקר,<br>אמנם לא זכיתי להיות מדריך או מורה בזמן שהיית תלמיד בבית הצייר, אך זכיתי לפגוש ולהכיר אותך במספר הזדמנויות. עד לאחרונה לא הכרתי את הסיפור האישי שלך, ולשמחתי נכחתי בהרצאה שלך בבית הצייר בפני הנערים ושמעתי אותו במלואו.<br><br>הסיפור שלך היה מרגש מאוד. התרגשתי יחד איתך, ובכישרון רב הצלחת לרתק ולהפנט את התלמידים. אתה מקור להשראה שמאיר הרבה תקווה עבור הנערים שלנו. מי כמוך מסוגל להבין אותם באמת ולגעת בליבם, לב שלעיתים הפך למוגן בעקבות נסיבות החיים, וליצוק לתוכו את הרגש שהם כל כך זקוקים לו.<br><br>יותר מכל, זיהיתי אמפתיה עמוקה של הנערים כלפיך, כאילו הם מלווים אותך במסע הסיפור שלך ובעצם גם מטפלים בעצמם דרך ההקשבה. זו, חבר יקר, אומנות בפני עצמה.<br><br>כל הכבוד על האומץ לחשוף ולהיחשף כדי להרבות טוב בעולם. ממליץ בחום להגיע, לשמוע ולהקשיב. ❤️</div><button class="read-more-btn">הצג עוד</button><div class="testimonial-author">עודד כרמני</div></div>
+                        <div class="testimonial-card"><i class="fas fa-quote-right quote-icon"></i><div class="testimonial-text">רציתי לומר לך כמה מילים על ההרצאה.<br>היית מיוחד, אותנטי וסוחף. הצלחת לרתק תלמידים שגם כך לא קל להם לשבת לאורך זמן. העברת את סיפור חייך בצורה קוהרנטית ומרתקת.<br><br>ראיתי כיצד לאחר ההרצאה נשארו תלמידים לשוחח איתך, וזה אמר הרבה. אני יכול לומר לך שגם אותי חיזקת מאוד. שאבתי כוח מהדקות של השיחה איתך. גם הפידבקים מהנערים היו דומים ונשמע שהם רצו לשמוע עוד.<br><br>תבוא יותר ❤️</div><div class="testimonial-full-text">רציתי לומר לך כמה מילים על ההרצאה.<br>היית מיוחד, אותנטי וסוחף. הצלחת לרתק תלמידים שגם כך לא קל להם לשבת לאורך זמן. העברת את סיפור חייך בצורה קוהרנטית ומרתקת.<br><br>ראיתי כיצד לאחר ההרצאה נשארו תלמידים לשוחח איתך, וזה אמר הרבה. אני יכול לומר לך שגם אותי חיזקת מאוד. שאבתי כוח מהדקות של השיחה איתך. גם הפידבקים מהנערים היו דומים ונשמע שהם רצו לשמוע עוד.<br><br>תבוא יותר ❤️</div><button class="read-more-btn">הצג עוד</button><div class="testimonial-author">ניר בן ישי <span>רכז מנ”ש נווה עופר, עיריית תל אביב יפו</span></div></div>
+                        <div class="testimonial-card"><i class="fas fa-quote-right quote-icon"></i><div class="testimonial-text">וואי נדב, היה ממש טוב.<br>הרגשתי שאתה מדבר עליי כאילו אני מדבר על עצמי. היה לי קל להקשיב לך, אפילו יותר מאשר לצוות, כי אתה ממש כמעט כמוני.<br><br>איזה תותח.</div><div class="testimonial-full-text">וואי נדב, היה ממש טוב.<br>הרגשתי שאתה מדבר עליי כאילו אני מדבר על עצמי. היה לי קל להקשיב לך, אפילו יותר מאשר לצוות, כי אתה ממש כמעט כמוני.<br><br>איזה תותח.</div><button class="read-more-btn">הצג עוד</button><div class="testimonial-author">אור, תלמיד</div></div>
+                        <div class="testimonial-card"><i class="fas fa-quote-right quote-icon"></i><div class="testimonial-text">זכיתי לשמוע יחד עם תלמידיי את ההרצאה העוצמתית של נדב. זה היה שיעור מרגש על היכולת האנושית לצמוח מתוך משברים ולבחור בחיים פעם אחר פעם.<br><br>נדב שיתף בפתיחות ובכנות בחוויות הלא פשוטות שעבר, והדבר המרשים ביותר היה הדרך שבה הצליח לזקק תובנות מעשיות שכל אחד יכול לקחת אל חייו האישיים.<br><br>המסרים המרכזיים בהרצאה, שנושקים למה שאנו מנסים להעביר לתלמידים בבית הספר כל הזמן, הם שלבחירות יש משמעות, שידע הוא כוח וכמה חשוב להיעזר בדמויות שמאמינות בך ורוצות בהצלחתך.<br><br>ממליצה בחום.</div><div class="testimonial-full-text">זכיתי לשמוע יחד עם תלמידיי את ההרצאה העוצמתית של נדב. זה היה שיעור מרגש על היכולת האנושית לצמוח מתוך משברים ולבחור בחיים פעם אחר פעם.<br><br>נדב שיתף בפתיחות ובכנות בחוויות הלא פשוטות שעבר, והדבר המרשים ביותר היה הדרך שבה הצליח לזקק תובנות מעשיות שכל אחד יכול לקחת אל חייו האישיים.<br><br>המסרים המרכזיים בהרצאה, שנושקים למה שאנו מנסים להעביר לתלמידים בבית הספר כל הזמן, הם שלבחירות יש משמעות, שידע הוא כוח וכמה חשוב להיעזר בדמויות שמאמינות בך ורוצות בהצלחתך.<br><br>ממליצה בחום.</div><button class="read-more-btn">הצג עוד</button><div class="testimonial-author">מיכלי שרוני <span>בית הצייר</span></div></div>
+                        <div class="testimonial-card"><i class="fas fa-quote-right quote-icon"></i><div class="testimonial-text">נדב הגיע להרצאות אצלנו בבית הספר לנוער בסיכון. היה מרגש לראות כיצד בתוך דקות ספורות הצליח להיכנס לליבם של התלמידים. הסיפור שלו נגע בכל אחד ואחד מהם.<br><br>לתלמידים שלנו יש קושי לשבת זמן ממושך, אך הם ישבו, הקשיבו ואף השתתפו לאורך כל ההרצאה. באופן אישי הרגשתי שמה שנדב מביא איתו, החוויה, האותנטיות והיכולת לגעת, הוא דבר שגם אם מאוד אנסה לא אצליח להביא באותה צורה.<br><br>נדב הוא בחור כריזמטי, אופטימי ובעל חוש הומור, שהצליח להרים את עצמו בשתי ידיו. בסיום המפגש עמדו התלמידים בתור כדי ללחוץ את ידו ולחבק אותו.<br><br>אני ממליצה עליו בחום רב.</div><div class="testimonial-full-text">נדב הגיע להרצאות אצלנו בבית הספר לנוער בסיכון. היה מרגש לראות כיצד בתוך דקות ספורות הצליח להיכנס לליבם של התלמידים. הסיפור שלו נגע בכל אחד ואחד מהם.<br><br>לתלמידים שלנו יש קושי לשבת זמן ממושך, אך הם ישבו, הקשיבו ואף השתתפו לאורך כל ההרצאה. באופן אישי הרגשתי שמה שנדב מביא איתו, החוויה, האותנטיות והיכולת לגעת, הוא דבר שגם אם מאוד אנסה לא אצליח להביא באותה צורה.<br><br>נדב הוא בחור כריזמטי, אופטימי ובעל חוש הומור, שהצליח להרים את עצמו בשתי ידיו. בסיום המפגש עמדו התלמידים בתור כדי ללחוץ את ידו ולחבק אותו.<br><br>אני ממליצה עליו בחום רב.</div><button class="read-more-btn">הצג עוד</button><div class="testimonial-author">קרן הבר <span>מחנכת בבית הספר</span></div></div>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
         <section id="contact">
@@ -789,10 +684,18 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <div id="testimonialModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalText"></div>
+            <div id="modalAuthor"></div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // אנימציות גלילה מאוחדות
+            // --- אנימציות גלילה מאוחדות ---
             const revealElements = document.querySelectorAll('.reveal-up');
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -804,7 +707,7 @@
             }, { root: null, threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // פתיחת תפריט נייד
+            // --- תפריט נייד ---
             const menuToggle = document.querySelector('.menu-toggle');
             const navLinks = document.querySelector('.nav-links');
             if(menuToggle && navLinks) {
@@ -821,10 +724,9 @@
                 });
             }
 
-            // לוגיקה להופעת כפתור הווצאפ הצף
+            // --- כפתור ווצאפ צף ---
             const floatingWa = document.getElementById('floating-wa');
             const heroSection = document.getElementById('hero-section');
-            
             if (floatingWa && heroSection) {
                 window.addEventListener('scroll', () => {
                     const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
@@ -836,17 +738,53 @@
                 });
             }
 
-            // לוגיקה לכפתור "הצג הכל" (הרצאות בנייד)
+            // --- "הצג הכל" להרצאות בנייד ---
             const showMoreBtn = document.getElementById('showMoreBtn');
             const lecturesWrapper = document.getElementById('lecturesWrapper');
             const showMoreContainer = document.getElementById('showMoreContainer');
-            
             if(showMoreBtn && lecturesWrapper) {
                 showMoreBtn.addEventListener('click', () => {
                     lecturesWrapper.classList.add('expanded'); 
                     showMoreContainer.style.display = 'none'; 
                 });
             }
+
+            // --- לוגיקה לחלון הקופץ (Modal) של הביקורות ---
+            const modal = document.getElementById('testimonialModal');
+            const closeModalBtn = document.querySelector('.close-modal');
+            const modalText = document.getElementById('modalText');
+            const modalAuthor = document.getElementById('modalAuthor');
+
+            // פתיחת החלון
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const card = e.target.closest('.testimonial-card');
+                    const fullText = card.querySelector('.testimonial-full-text').innerHTML;
+                    const authorInfo = card.querySelector('.testimonial-author').innerHTML;
+
+                    modalText.innerHTML = fullText;
+                    modalAuthor.innerHTML = authorInfo;
+                    
+                    modal.classList.add('show');
+                    document.body.classList.add('modal-open'); // עוצר גלילה מאחור
+                });
+            });
+
+            // סגירת החלון בלחיצה על X
+            if(closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    modal.classList.remove('show');
+                    document.body.classList.remove('modal-open');
+                });
+            }
+
+            // סגירת החלון בלחיצה מחוץ לתוכן שלו
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    document.body.classList.remove('modal-open');
+                }
+            });
         });
     </script>
 </body>
