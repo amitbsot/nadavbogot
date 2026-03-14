@@ -122,7 +122,9 @@
         .logo-slider::before { left: 0; background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0) 100%); }
         .logo-slider::after { right: 0; background: linear-gradient(to left, #fff 0%, rgba(255,255,255,0) 100%); }
         .logo-slide-track { display: flex; width: max-content; animation: scrollLogos 30s linear infinite; }
-        .logo-slide-track:hover { animation-play-state: paused; }
+        @media (hover: hover) and (pointer: fine) {
+            .logo-slide-track:hover,.testimonials-track:hover {animation-play-state: paused;}
+            .logo-slide-track.is-paused,.testimonials-track.is-paused { animation-play-state: paused !important;}}
         @keyframes scrollLogos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .slide { width: 220px; height: 100px; display: flex; align-items: center; justify-content: center; padding: 0 1rem; }
         .mock-logo { width: 100%; height: 100%; background: var(--sand); border: 1px dashed var(--bronze); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-main); font-weight: 600; font-size: 0.95rem; text-align: center; padding: 0.5rem; }
@@ -484,19 +486,18 @@
         <section class="logo-slider-section reveal-up">
             <div class="logo-slider">
                 <div class="logo-slide-track">
-                    <div class="slide"><div class="mock-logo">הוסטל בית הצייר</div></div>
-                    <div class="slide"><div class="mock-logo">שלטר ירושלים</div></div>
-                    <div class="slide"><div class="mock-logo">מרכז נוער בת ים</div></div>
-                    <div class="slide"><div class="mock-logo">פנימיית נירים</div></div>
-                    <div class="slide"><div class="mock-logo">מקיף גילה</div></div>
-                    <div class="slide"><div class="mock-logo">בי"ס רב תרבותי ת"א</div></div>
+                    <div class="slide"><img src="בית הצייר.jpeg" alt="לוגו בית הצייר"></div>
+                    <div class="slide"><img src="בת ים.jpeg" alt="מרכז נוער בת ים"></div>
+                    <div class="slide"><img src="ירושלים.jpeg" alt="שלטר ירושלים"></div>
+                    <div class="slide"><img src="נירים.jpeg" alt="פנימיית נירים"></div>
+                    <div class="slide"><img src="גילה.jpeg" alt="מקיף גילה"></div>
+                
                     
-                    <div class="slide"><div class="mock-logo">הוסטל בית הצייר</div></div>
-                    <div class="slide"><div class="mock-logo">שלטר ירושלים</div></div>
-                    <div class="slide"><div class="mock-logo">מרכז נוער בת ים</div></div>
-                    <div class="slide"><div class="mock-logo">פנימיית נירים</div></div>
-                    <div class="slide"><div class="mock-logo">מקיף גילה</div></div>
-                    <div class="slide"><div class="mock-logo">בי"ס רב תרבותי ת"א</div></div>
+                    <div class="slide"><img src="בית הצייר.jpeg" alt="לוגו בית הצייר"></div>
+                    <div class="slide"><img src="בת ים.jpeg" alt="מרכז נוער בת ים"></div>
+                    <div class="slide"><img src="ירושלים.jpeg" alt="שלטר ירושלים"></div>
+                    <div class="slide"><img src="נירים.jpeg" alt="פנימיית נירים"></div>
+                    <div class="slide"><img src="גילה.jpeg" alt="מקיף גילה"></div>
                 </div>
             </div>
         </section>
